@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Dashboard Page — scaled for Small Phone API 36 (360 × 640 dp)
+    Original Figma frame: 402 × 874 dp  |  Scale X=0.895  Y=0.732
+-->
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/dashboard_bg">
+
+    <!-- Decorative background ellipses (partially off-screen, clipped) -->
+    <View
+        android:id="@+id/ellipse_top_left"
+        android:layout_width="@dimen/ellipse_bg_size"
+        android:layout_height="@dimen/ellipse_bg_size"
+        android:layout_gravity="top|start"
+        android:layout_marginStart="@dimen/ellipse_left_margin_start"
+        android:layout_marginTop="@dimen/ellipse_left_margin_top"
+        android:background="@drawable/shape_circle_yellow" />
+
+    <View
+        android:id="@+id/ellipse_top_right"
+        android:layout_width="@dimen/ellipse_bg_size"
+        android:layout_height="@dimen/ellipse_bg_size"
+        android:layout_gravity="top|end"
+        android:layout_marginEnd="@dimen/ellipse_right_margin_end"
+        android:layout_marginTop="@dimen/ellipse_right_margin_top"
+        android:background="@drawable/shape_circle_yellow" />
+
+    <!-- Bottom gradient board -->
+    <View
+        android:id="@+id/view_login_board"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/board_height"
+        android:layout_gravity="bottom"
+        android:background="@drawable/shape_gradient_board" />
+
+    <!-- Main content LinearLayout -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:clipToPadding="false">
+
+        <!-- Greeting text -->
+        <TextView
+            android:id="@+id/tv_greeting"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/greeting_margin_top"
+            android:text="@string/greeting_text"
+            android:textSize="@dimen/greeting_text_size"
+            android:textColor="@color/text_black"
+            android:fontFamily="sans-serif-light"
+            android:gravity="center"
+            android:letterSpacing="0.2"
+            android:paddingStart="@dimen/greeting_padding_horizontal"
+            android:paddingEnd="@dimen/greeting_padding_horizontal" />
+
+        <!-- AutoPlayer circular button -->
+        <FrameLayout
+            android:id="@+id/fl_auto_player"
+            android:layout_width="@dimen/player_circle_size"
+            android:layout_height="@dimen/player_circle_size"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/player_margin_top">
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/shape_circle_yellow_outer" />
+
+            <ImageView
+                android:id="@+id/iv_play_button"
+                android:layout_width="@dimen/player_inner_size"
+                android:layout_height="@dimen/player_inner_size"
+                android:layout_gravity="center"
+                android:background="@drawable/shape_circle_white"
+                android:src="@drawable/ic_play"
+                android:scaleType="center"
+                android:padding="@dimen/play_icon_padding"
+                android:contentDescription="@string/cd_play_button" />
+        </FrameLayout>
+
+        <!-- Feelings input box -->
+        <EditText
+            android:id="@+id/et_feelings"
+            android:layout_width="@dimen/input_box_width"
+            android:layout_height="@dimen/input_box_height"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/input_margin_top"
+            android:background="@drawable/shape_input_background"
+            android:hint="@string/hint_feelings"
+            android:textColorHint="@color/text_hint"
+            android:textColor="@color/text_black"
+            android:textSize="@dimen/input_text_size"
+            android:fontFamily="sans-serif-light"
+            android:paddingStart="@dimen/input_padding_horizontal"
+            android:paddingEnd="@dimen/input_padding_horizontal"
+            android:paddingTop="@dimen/input_padding_vertical"
+            android:gravity="top|start"
+            android:inputType="textMultiLine"
+            android:maxLines="3" />
+
+        <!-- Song Player card -->
+        <LinearLayout
+            android:id="@+id/ll_song_player"
+            android:layout_width="@dimen/song_player_width"
+            android:layout_height="@dimen/song_player_height"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/song_player_margin_top"
+            android:orientation="vertical"
+            android:background="@drawable/shape_song_player_bg"
+            android:gravity="center_horizontal"
+            android:paddingTop="@dimen/song_player_padding_top"
+            android:paddingBottom="@dimen/song_player_padding_bottom"
+            android:paddingStart="@dimen/song_player_padding_horizontal"
+            android:paddingEnd="@dimen/song_player_padding_horizontal">
+
+            <!-- Album art with dark overlay -->
+            <FrameLayout
+                android:layout_width="@dimen/album_art_size"
+                android:layout_height="@dimen/album_art_size">
+
+                <ImageView
+                    android:id="@+id/iv_album_art"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/ic_album_placeholder"
+                    android:scaleType="centerCrop"
+                    android:contentDescription="@string/cd_album_art" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/shape_blur_overlay" />
+            </FrameLayout>
+
+            <!-- Song title -->
+            <TextView
+                android:id="@+id/tv_song_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/song_title_margin_top"
+                android:text="@string/song_title"
+                android:textSize="@dimen/song_title_text_size"
+                android:textColor="@color/text_black"
+                android:fontFamily="sans-serif-light"
+                android:letterSpacing="0.2"
+                android:gravity="center" />
+
+            <!-- Playback controls -->
+            <LinearLayout
+                android:id="@+id/ll_controls"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/controls_margin_top"
+                android:orientation="horizontal"
+                android:gravity="center">
+
+                <ImageView
+                    android:id="@+id/iv_skip_back"
+                    android:layout_width="@dimen/control_icon_size"
+                    android:layout_height="@dimen/control_icon_size"
+                    android:src="@drawable/ic_skip_back"
+                    android:scaleType="fitCenter"
+                    android:contentDescription="@string/cd_skip_back" />
+
+                <ImageView
+                    android:id="@+id/iv_play_pause"
+                    android:layout_width="@dimen/control_play_size"
+                    android:layout_height="@dimen/control_play_size"
+                    android:layout_marginStart="@dimen/control_spacing"
+                    android:layout_marginEnd="@dimen/control_spacing"
+                    android:src="@drawable/ic_play"
+                    android:scaleType="fitCenter"
+                    android:contentDescription="@string/cd_play_pause" />
+
+                <ImageView
+                    android:id="@+id/iv_skip_forward"
+                    android:layout_width="@dimen/control_icon_size"
+                    android:layout_height="@dimen/control_icon_size"
+                    android:src="@drawable/ic_skip_forward"
+                    android:scaleType="fitCenter"
+                    android:contentDescription="@string/cd_skip_forward" />
+            </LinearLayout>
+
+            <!-- Progress seekbar -->
+            <SeekBar
+                android:id="@+id/seekbar_progress"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/seekbar_margin_top"
+                android:progressDrawable="@drawable/shape_seekbar_track"
+                android:thumb="@null"
+                android:max="100"
+                android:progress="0" />
+
+            <!-- Time indicators -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="@dimen/time_row_margin_top"
+                android:gravity="center_vertical">
+
+                <ImageView
+                    android:id="@+id/iv_time_start"
+                    android:layout_width="@dimen/time_icon_size"
+                    android:layout_height="@dimen/time_icon_size"
+                    android:src="@drawable/ic_time_indicator"
+                    android:contentDescription="@string/cd_time_start" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_weight="1" />
+
+                <ImageView
+                    android:id="@+id/iv_time_end"
+                    android:layout_width="@dimen/time_icon_size"
+                    android:layout_height="@dimen/time_icon_size"
+                    android:src="@drawable/ic_time_indicator"
+                    android:contentDescription="@string/cd_time_end" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <!-- Spacer pushes bottom nav down -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <!-- Bottom navigation bar -->
+        <FrameLayout
+            android:id="@+id/fl_bottom_nav"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/bottom_nav_height"
+            android:background="@drawable/shape_bottom_nav">
+
+            <!-- Logout: left side, vertically centered -->
+            <TextView
+                android:id="@+id/tv_logout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start|center_vertical"
+                android:layout_marginStart="@dimen/nav_text_margin_start"
+                android:text="@string/logout"
+                android:textSize="@dimen/nav_text_size"
+                android:textColor="@color/text_black"
+                android:fontFamily="sans-serif-light"
+                android:letterSpacing="0.2" />
+
+            <!-- Nav icon: right side, vertically centered -->
+            <ImageView
+                android:id="@+id/iv_nav_icon"
+                android:layout_width="@dimen/nav_icon_size"
+                android:layout_height="@dimen/nav_icon_size"
+                android:layout_gravity="end|center_vertical"
+                android:layout_marginEnd="@dimen/nav_icon_margin_end"
+                android:src="@drawable/ic_nav_icon"
+                android:scaleType="fitCenter"
+                android:contentDescription="@string/cd_nav_icon" />
+        </FrameLayout>
+
+    </LinearLayout>
+</FrameLayout>

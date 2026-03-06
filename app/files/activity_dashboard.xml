@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@android:color/white">
+
+    <!-- Background decorative circles (positioned absolutely in parent) -->
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0">
+
+        <View
+            android:id="@+id/circle_top_left"
+            android:layout_width="344dp"
+            android:layout_height="344dp"
+            android:layout_marginStart="-97dp"
+            android:layout_marginTop="-218dp"
+            android:background="@drawable/circle_yellow_75"
+            android:contentDescription="@string/decorative_circle" />
+
+        <View
+            android:id="@+id/circle_top_right"
+            android:layout_width="344dp"
+            android:layout_height="344dp"
+            android:layout_marginStart="208dp"
+            android:layout_marginTop="-129dp"
+            android:background="@drawable/circle_yellow_75"
+            android:contentDescription="@string/decorative_circle" />
+    </FrameLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="0dp">
+
+            <!-- Header Section -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center_horizontal"
+                android:paddingTop="73dp"
+                android:paddingBottom="30dp">
+
+                <TextView
+                    android:id="@+id/header_text"
+                    android:layout_width="267dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/header_greeting"
+                    android:textSize="19sp"
+                    android:textColor="#000000"
+                    android:fontFamily="@font/lato_light"
+                    android:gravity="center"
+                    android:letterSpacing="0.2"
+                    android:lineSpacingMultiplier="1.0" />
+            </LinearLayout>
+
+            <!-- Play Button Section -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:paddingStart="144dp"
+                android:paddingEnd="144dp">
+
+                <FrameLayout
+                    android:layout_width="114.62dp"
+                    android:layout_height="114.62dp">
+
+                    <!-- Outer yellow circle -->
+                    <ImageView
+                        android:id="@+id/play_button_background"
+                        android:layout_width="114.62dp"
+                        android:layout_height="114.62dp"
+                        android:layout_gravity="center"
+                        android:background="@drawable/circle_yellow_play"
+                        android:contentDescription="@string/play_button_background" />
+
+                    <!-- Play icon inside -->
+                    <ImageView
+                        android:id="@+id/play_icon"
+                        android:layout_width="91.69dp"
+                        android:layout_height="91.69dp"
+                        android:layout_gravity="center"
+                        android:scaleType="centerInside"
+                        android:src="@drawable/ic_play_button"
+                        android:contentDescription="@string/play_button" />
+                </FrameLayout>
+            </LinearLayout>
+
+            <!-- Text Input Section -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center_horizontal"
+                android:paddingStart="28dp"
+                android:paddingEnd="28dp"
+                android:paddingTop="60dp"
+                android:paddingBottom="30dp">
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/input_card"
+                    android:layout_width="345dp"
+                    android:layout_height="103dp"
+                    android:layout_gravity="center"
+                    app:cardCornerRadius="20dp"
+                    app:cardElevation="4dp"
+                    app:cardBackgroundColor="#d9d9d9">
+
+                    <EditText
+                        android:id="@+id/mood_input"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:hint="@string/input_hint"
+                        android:textColorHint="#000000"
+                        android:textColor="#000000"
+                        android:textSize="10sp"
+                        android:fontFamily="@font/lato_light"
+                        android:gravity="top|start"
+                        android:padding="16dp"
+                        android:background="@android:color/transparent"
+                        android:inputType="textMultiLine"
+                        android:letterSpacing="0.2" />
+                </com.google.android.material.card.MaterialCardView>
+            </LinearLayout>
+
+            <!-- Song Player Card -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center_horizontal"
+                android:paddingBottom="30dp">
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/song_player_card"
+                    android:layout_width="170dp"
+                    android:layout_height="275dp"
+                    android:layout_gravity="center"
+                    app:cardCornerRadius="30dp"
+                    app:cardElevation="4dp"
+                    app:cardBackgroundColor="#bbbbbb">
+
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <!-- Album Art -->
+                        <ImageView
+                            android:id="@+id/album_art"
+                            android:layout_width="134.88dp"
+                            android:layout_height="134.88dp"
+                            android:layout_gravity="center|top"
+                            android:layout_marginTop="19dp"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/album_placeholder"
+                            android:contentDescription="@string/album_art" />
+
+                        <!-- Song Title -->
+                        <TextView
+                            android:id="@+id/song_title"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal|bottom"
+                            android:layout_marginBottom="70dp"
+                            android:text="@string/song_title"
+                            android:textSize="10sp"
+                            android:textColor="#000000"
+                            android:fontFamily="@font/lato_light"
+                            android:letterSpacing="0.2" />
+
+                        <!-- Control Buttons (Previous, Play, Next) -->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal|bottom"
+                            android:layout_marginBottom="30dp"
+                            android:gravity="center_horizontal"
+                            android:orientation="horizontal"
+                            android:spacing="20dp">
+
+                            <ImageButton
+                                android:id="@+id/btn_previous"
+                                android:layout_width="18.52dp"
+                                android:layout_height="18.52dp"
+                                android:layout_marginEnd="20dp"
+                                android:scaleType="centerInside"
+                                android:background="?attr/selectableItemBackgroundBorderless"
+                                android:src="@drawable/ic_previous"
+                                android:contentDescription="@string/previous_track" />
+
+                            <ImageButton
+                                android:id="@+id/btn_play_pause"
+                                android:layout_width="23.15dp"
+                                android:layout_height="23.15dp"
+                                android:layout_marginEnd="20dp"
+                                android:scaleType="centerInside"
+                                android:background="?attr/selectableItemBackgroundBorderless"
+                                android:src="@drawable/ic_play"
+                                android:contentDescription="@string/play_pause" />
+
+                            <ImageButton
+                                android:id="@+id/btn_next"
+                                android:layout_width="18.52dp"
+                                android:layout_height="18.52dp"
+                                android:scaleType="centerInside"
+                                android:background="?attr/selectableItemBackgroundBorderless"
+                                android:src="@drawable/ic_next"
+                                android:contentDescription="@string/next_track" />
+                        </LinearLayout>
+
+                        <!-- Progress Bar -->
+                        <ProgressBar
+                            android:id="@+id/progress_bar"
+                            style="?android:attr/progressBarStyleHorizontal"
+                            android:layout_width="98.97dp"
+                            android:layout_height="1.60dp"
+                            android:layout_gravity="center_horizontal|bottom"
+                            android:layout_marginBottom="15dp"
+                            android:progress="50"
+                            android:progressDrawable="@drawable/progress_bar_style"
+                            android:contentDescription="@string/song_progress" />
+                    </FrameLayout>
+                </com.google.android.material.card.MaterialCardView>
+            </LinearLayout>
+
+            <!-- Spacer for bottom navigation -->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="74dp" />
+        </LinearLayout>
+    </ScrollView>
+
+    <!-- Bottom Navigation Bar -->
+    <LinearLayout
+        android:id="@+id/bottom_nav"
+        android:layout_width="match_parent"
+        android:layout_height="74dp"
+        android:orientation="horizontal"
+        android:gravity="center_vertical|end"
+        android:paddingEnd="12dp"
+        android:background="#e9ee67">
+
+        <ImageButton
+            android:id="@+id/nav_settings"
+            android:layout_width="51dp"
+            android:layout_height="51dp"
+            android:scaleType="centerInside"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:src="@drawable/ic_settings"
+            android:contentDescription="@string/settings" />
+    </LinearLayout>
+</LinearLayout>

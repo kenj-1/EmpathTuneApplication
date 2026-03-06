@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Colors from Figma Design -->
+    <color name="color_white">#FFFFFF</color>
+    <color name="color_black">#000000</color>
+    <color name="color_yellow_primary">#edda0a</color>
+    <color name="color_yellow_light">#f2fb41</color>
+    <color name="color_yellow_bottom">#e9ee67</color>
+    <color name="color_gray_light">#d9d9d9</color>
+    <color name="color_gray_medium">#bbbbbb</color>
+    <color name="color_shadow">#07050480</color>
+
+    <!-- Gradients are defined in drawable XML files -->
+</resources>

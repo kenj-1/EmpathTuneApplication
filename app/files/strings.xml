@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Header -->
+    <string name="header_greeting">How are we feeling today, user?</string>
+
+    <!-- Input -->
+    <string name="input_hint">Type what you feel here</string>
+
+    <!-- Song Player -->
+    <string name="song_title">Less Than Zero</string>
+
+    <!-- Buttons -->
+    <string name="play_button">Play Button</string>
+    <string name="play_button_background">Play Button Background</string>
+    <string name="previous_track">Previous Track</string>
+    <string name="play_pause">Play or Pause</string>
+    <string name="next_track">Next Track</string>
+    <string name="settings">Settings</string>
+
+    <!-- Descriptions -->
+    <string name="album_art">Album Artwork</string>
+    <string name="song_progress">Song Progress Bar</string>
+    <string name="decorative_circle">Decorative Background Circle</string>
+</resources>

@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- ════════════════════════════════════════════
+         DASHBOARD PAGE
+         ════════════════════════════════════════════ -->
+
+    <!-- Background ellipses (344 × 0.895 ≈ 308) -->
+    <dimen name="ellipse_bg_size">308dp</dimen>
+    <dimen name="ellipse_left_margin_start">-87dp</dimen>   <!-- -97 × 0.895 -->
+    <dimen name="ellipse_left_margin_top">-160dp</dimen>    <!-- -218 × 0.732 -->
+    <dimen name="ellipse_right_margin_end">-134dp</dimen>   <!-- -150 × 0.895 -->
+    <dimen name="ellipse_right_margin_top">-94dp</dimen>    <!-- -129 × 0.732 -->
+
+    <!-- Bottom gradient board (603 × 0.732 ≈ 441) -->
+    <dimen name="board_height">441dp</dimen>
+
+    <!-- Greeting text (y=73 × 0.732 ≈ 53) -->
+    <dimen name="greeting_margin_top">53dp</dimen>
+    <dimen name="greeting_text_size">17sp</dimen>
+    <dimen name="greeting_padding_horizontal">61dp</dimen>  <!-- 68 × 0.895 -->
+
+    <!-- AutoPlayer circle (115 × 0.895 ≈ 103) -->
+    <dimen name="player_circle_size">103dp</dimen>
+    <dimen name="player_inner_size">82dp</dimen>            <!-- 92 × 0.895 -->
+    <dimen name="player_margin_top">16dp</dimen>
+    <dimen name="play_icon_padding">16dp</dimen>
+
+    <!-- Feelings input box -->
+    <dimen name="input_box_width">309dp</dimen>             <!-- 345 × 0.895 -->
+    <dimen name="input_box_height">75dp</dimen>             <!-- 103 × 0.732 -->
+    <dimen name="input_margin_top">14dp</dimen>
+    <dimen name="input_corner_radius">18dp</dimen>
+    <dimen name="input_text_size">10sp</dimen>
+    <dimen name="input_padding_horizontal">14dp</dimen>
+    <dimen name="input_padding_vertical">10dp</dimen>
+
+    <!-- Song Player card (170×0.895=152, 275×0.732=201) -->
+    <dimen name="song_player_width">152dp</dimen>
+    <dimen name="song_player_height">201dp</dimen>
+    <dimen name="song_player_margin_top">8dp</dimen>
+    <dimen name="song_player_corner_radius">27dp</dimen>
+    <dimen name="song_player_padding_top">6dp</dimen>
+    <dimen name="song_player_padding_bottom">6dp</dimen>
+    <dimen name="song_player_padding_horizontal">9dp</dimen>
+
+    <!-- Album art (135 × 0.895 ≈ 121) -->
+    <dimen name="album_art_size">110dp</dimen>
+
+    <!-- Song title -->
+    <dimen name="song_title_text_size">10sp</dimen>
+    <dimen name="song_title_margin_top">5dp</dimen>
+
+    <!-- Playback controls -->
+    <dimen name="controls_margin_top">5dp</dimen>
+    <dimen name="control_icon_size">17dp</dimen>
+    <dimen name="control_play_size">20dp</dimen>
+    <dimen name="control_spacing">7dp</dimen>
+
+    <!-- SeekBar -->
+    <dimen name="seekbar_margin_top">5dp</dimen>
+    <dimen name="seekbar_track_height">2dp</dimen>
+
+    <!-- Time indicators -->
+    <dimen name="time_icon_size">10dp</dimen>
+    <dimen name="time_row_margin_top">3dp</dimen>
+
+    <!-- Bottom nav bar (74 × 0.732 ≈ 54) -->
+    <dimen name="bottom_nav_height">54dp</dimen>
+    <dimen name="bottom_nav_corner_radius">27dp</dimen>
+    <dimen name="nav_icon_size">38dp</dimen>                <!-- 51 × 0.732 -->
+    <dimen name="nav_icon_margin_end">18dp</dimen>          <!-- 39 × 0.895, adjusted -->
+    <dimen name="nav_text_margin_start">20dp</dimen>
+    <dimen name="nav_text_size">11sp</dimen>
+
+    <!-- Elevation -->
+    <dimen name="card_elevation">4dp</dimen>
+
+
+    <!-- ════════════════════════════════════════════
+         PROFILE PAGE
+         ════════════════════════════════════════════ -->
+
+    <!-- Background gradient board (383×0.895=343, fills ~70% height) -->
+    <dimen name="profile_board_width">343dp</dimen>
+    <dimen name="profile_board_height">468dp</dimen>        <!-- fills bottom of 640dp screen -->
+    <dimen name="profile_board_corner_radius">27dp</dimen>
+
+    <!-- Header section height (covers top ~26% of 640dp screen) -->
+    <dimen name="profile_header_height">168dp</dimen>
+
+    <!-- Menu icon (47 × 0.895 ≈ 42) -->
+    <dimen name="menu_icon_size">42dp</dimen>
+    <dimen name="menu_margin_top">12dp</dimen>
+    <dimen name="menu_margin_end">18dp</dimen>
+    <dimen name="menu_icon_padding">8dp</dimen>
+    <dimen name="menu_bg_corner_radius">12dp</dimen>
+
+    <!-- Profile photo (123 × 0.895 ≈ 110) -->
+    <dimen name="profile_photo_size">100dp</dimen>
+    <dimen name="profile_photo_margin_start">24dp</dimen>
+    <dimen name="profile_photo_margin_bottom">12dp</dimen>
+
+    <!-- Name / status text (aligned right of photo) -->
+    <dimen name="profile_name_margin_start">136dp</dimen>   <!-- photo_start(24)+photo_size(100)+12 -->
+    <dimen name="profile_name_margin_bottom">14dp</dimen>
+    <dimen name="profile_name_text_size">26sp</dimen>       <!-- 32sp × 0.895, capped for small screen -->
+    <dimen name="status_margin_top">4dp</dimen>
+    <dimen name="status_text_size">10sp</dimen>
+
+    <!-- Form fields -->
+    <dimen name="field_label_margin_top_first">14dp</dimen>
+    <dimen name="field_label_margin_top">10dp</dimen>
+    <dimen name="field_label_text_size">10sp</dimen>
+    <dimen name="field_margin_top">4dp</dimen>
+    <dimen name="field_width">290dp</dimen>                 <!-- 345 × 0.895, minus padding -->
+    <dimen name="field_height">36dp</dimen>
+    <dimen name="field_text_size">11sp</dimen>
+    <dimen name="field_padding_horizontal">12dp</dimen>
+    <dimen name="field_corner_radius">18dp</dimen>
+    <dimen name="form_padding_bottom">16dp</dimen>
+</resources>

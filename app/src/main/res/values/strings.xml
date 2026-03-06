@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">MoodTunes</string>
+
+    <!-- Dashboard -->
+    <string name="greeting_text">How are we feeling today, user?</string>
+    <string name="hint_feelings">Type what you feel here</string>
+    <string name="song_title">Less Than Zero</string>
+    <string name="logout">Logout</string>
+
+    <!-- Profile -->
+    <string name="profile_username_display">User</string>
+    <string name="empathy_status">Empathy Status: Yearner</string>
+    <string name="label_username">Username</string>
+    <string name="label_first_name">First Name</string>
+    <string name="label_middle_name">Middle Name</string>
+    <string name="label_last_name">Last Name</string>
+    <string name="label_email">Email</string>
+    <string name="field_username_value">User</string>
+    <string name="field_first_name_value">John</string>
+    <string name="field_middle_name_value">Middle</string>
+    <string name="field_last_name_value">Doe</string>
+    <string name="field_email_value">johndoe@gmail.com</string>
+
+    <!-- Content descriptions -->
+    <string name="cd_play_button">Play music</string>
+    <string name="cd_album_art">Album artwork</string>
+    <string name="cd_play_pause">Play or pause</string>
+    <string name="cd_skip_back">Previous track</string>
+    <string name="cd_skip_forward">Next track</string>
+    <string name="cd_time_start">Current time</string>
+    <string name="cd_time_end">Total duration</string>
+    <string name="cd_nav_icon">Navigation menu</string>
+    <string name="cd_menu">Menu</string>
+    <string name="cd_profile_photo">Profile photo</string>
+
+</resources>

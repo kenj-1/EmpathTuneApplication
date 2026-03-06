@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#FFFFFF"
+    android:padding="24dp">
+
+    <!-- Welcome Text -->
+    <TextView
+        android:id="@+id/tvWelcome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Welcome to EmpathTune"
+        android:textSize="16sp"
+        android:layout_gravity="center"
+        android:layout_marginTop="40dp"/>
+
+    <!-- Logo -->
+    <ImageView
+        android:id="@+id/imgLogo"
+        android:layout_width="90dp"
+        android:layout_height="81dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"/>
+        <!--android:src="@drawable/app_logo"-->
+
+    <!-- Login Card -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="#BBBBBB"
+        android:padding="24dp"
+        android:layout_marginTop="40dp">
+
+        <!-- Title -->
+        <TextView
+            android:id="@+id/tvLoginTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Log In"
+            android:textSize="20sp"
+            android:layout_gravity="center"
+            android:layout_marginBottom="20dp"/>
+
+        <!-- Username -->
+        <EditText
+            android:id="@+id/etUsername"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Username"
+            android:background="#FBFB64"
+            android:padding="12dp"
+            android:layout_marginBottom="16dp"/>
+
+        <!-- Password -->
+        <EditText
+            android:id="@+id/etPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Password"
+            android:inputType="textPassword"
+            android:background="#FBFB64"
+            android:padding="12dp"
+            android:layout_marginBottom="8dp"/>
+
+        <!-- Forgot Password -->
+        <TextView
+            android:id="@+id/tvForgotPassword"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Forgot Password?"
+            android:textSize="10sp"
+            android:layout_gravity="end"
+            android:layout_marginBottom="20dp"/>
+
+        <!-- Login Button -->
+
+        <!-- Login with -->
+        <Button
+            android:id="@+id/btnLogin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#FBFB64"
+            android:text="Log In"
+            android:textColor="#000000" />
+
+        <TextView
+            android:id="@+id/btnNoAccountClickherePlease"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="No Account? Click here"
+            android:textSize="12sp"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"/>
+
+        <!-- Google Button -->
+        <Button
+            android:id="@+id/btnGoogle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Google"
+            android:layout_marginTop="10dp"
+            android:background="#FBFB64"/>
+
+        <!-- Spotify Button -->
+        <Button
+            android:id="@+id/btnSpotify"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Spotify"
+            android:layout_marginTop="10dp"
+            android:background="#FBFB64"/>
+
+        <!-- Register -->
+        <TextView
+            android:id="@+id/tvRegister"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="No Account? Click here"
+            android:textSize="10sp"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"/>
+
+    </LinearLayout>
+
+</LinearLayout>

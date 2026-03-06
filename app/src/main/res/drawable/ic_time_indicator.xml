@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    ic_time_indicator.xml
+    Used by: image_15 (id="33:73") and image_16 (id="33:76")
+    Small 11dp icons at start/end of seek bar for time display
+-->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="11dp"
+    android:height="11dp"
+    android:viewportWidth="11"
+    android:viewportHeight="11">
+    <!-- Circle outline -->
+    <path
+        android:strokeColor="#000000"
+        android:strokeWidth="1"
+        android:fillColor="#00000000"
+        android:pathData="M5.5,1 A4.5,4.5 0 1,1 5.5,10 A4.5,4.5 0 1,1 5.5,1 Z" />
+    <!-- Clock hands -->
+    <path
+        android:strokeColor="#000000"
+        android:strokeWidth="1"
+        android:pathData="M5.5,3 L5.5,5.5 L7.5,7" />
+</vector>
