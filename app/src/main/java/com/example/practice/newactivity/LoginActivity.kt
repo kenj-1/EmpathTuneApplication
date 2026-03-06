@@ -17,6 +17,7 @@ class LoginActivity : Activity() {
             startActivity(intent)
         }
 
+
         // "Create new account" link → go to Register (Instruction #1)
         val tvCreateAccount = findViewById<TextView>(R.id.btnNoAccountClickherePlease)
         tvCreateAccount.setOnClickListener {
