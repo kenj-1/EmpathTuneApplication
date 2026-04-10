@@ -13,36 +13,25 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.NewActivity"
         tools:targetApi="31">
+
+        <!-- LOGIN (Launcher Screen) -->
         <activity
             android:name=".screens.login.LoginActivity"
-            android:exported="false" />
-        <activity
-            android:name=".DashboardActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ProfileActivity"
-            android:exported="false" />
-        <activity
-            android:name=".LoginActivity"
             android:exported="true">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-        <activity
-            android:name=".RegisterActivity"
-            android:exported="false">
 
-            <!--
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-            -->
         </activity>
+
+        <!-- Other Activities -->
+        <activity android:name=".DashboardActivity" android:exported="false" />
+        <activity android:name=".ProfileActivity" android:exported="false" />
+        <activity android:name=".RegisterActivity" android:exported="false" />
+        <activity android:name=".LoginActivity" android:exported="false" />
+
     </application>
 
 </manifest>
