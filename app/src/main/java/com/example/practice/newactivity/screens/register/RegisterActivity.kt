@@ -1,9 +1,11 @@
-package com.example.practice.newactivity
+package com.example.practice.newactivity.screens.register
 
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.widget.TextView
+import com.example.practice.newactivity.LoginActivity
+import com.example.practice.newactivity.R
 
 class RegisterActivity : Activity() {
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -27,9 +27,9 @@
         </activity>
 
         <!-- Other Activities -->
-        <activity android:name=".DashboardActivity" android:exported="false" />
+        <activity android:name=".screens.dashboard.DashboardActivity" android:exported="false" />
         <activity android:name=".ProfileActivity" android:exported="false" />
-        <activity android:name=".RegisterActivity" android:exported="false" />
+        <activity android:name=".screens.register.RegisterActivity" android:exported="false" />
         <activity android:name=".LoginActivity" android:exported="false" />
 
     </application>

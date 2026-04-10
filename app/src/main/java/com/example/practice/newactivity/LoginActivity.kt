@@ -4,6 +4,8 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.widget.TextView
+import com.example.practice.newactivity.screens.dashboard.DashboardActivity
+import com.example.practice.newactivity.screens.register.RegisterActivity
 
 class LoginActivity : Activity() {
     override fun onCreate(savedInstanceState: Bundle?) {
