@@ -20,6 +20,8 @@ class LoginActivity : AppCompatActivity(), LoginContract.View {
         val model = LoginModel(app)
         presenter = LoginPresenter(this, model)
 
+
+
         findViewById<Button>(R.id.btnLogin).setOnClickListener {
 
             val username = getEditTextValue(R.id.etUsername).trim()
@@ -38,11 +40,11 @@ class LoginActivity : AppCompatActivity(), LoginContract.View {
     }
 
     override fun showInvalidCredentials() {
-        toast("Invalid username or password ❌")
+        toast("Invalid username or password")
     }
 
     override fun showDashboardScreen() {
-        toast("Navigate to Dashboard 🚀")
-        // TODO: startActivity(Intent(this, DashboardActivity::class.java))
+        toast("Navigate to Dashboard")
+
     }
 }
