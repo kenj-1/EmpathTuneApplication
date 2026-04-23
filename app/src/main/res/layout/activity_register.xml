@@ -1,101 +1,304 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="#FFFFFF"
-    android:padding="24dp">
+    android:orientation="vertical">
 
-    <!-- Title -->
-    <TextView
-        android:id="@+id/tvRegisterTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Registration"
-        android:textSize="22sp"
-        android:layout_gravity="center"
-        android:layout_marginTop="30dp"/>
-
-    <!-- Card Layout -->
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:background="#BBBBBB"
-        android:padding="24dp"
-        android:layout_marginTop="30dp">
+        android:clipChildren="false"
+        android:clipToPadding="false">
 
-        <!-- Username -->
-        <EditText
-            android:id="@+id/etRegisterUsername"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Username"
-            android:background="#FBFB64"
-            android:padding="12dp"
-            android:layout_marginBottom="16dp"/>
+        <View
+            android:layout_width="170dp"
+            android:layout_height="170dp"
+            android:background="@drawable/bg_blob_circle"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:translationX="-60dp"
+            android:translationY="-65dp" />
 
-        <!-- Email -->
-        <EditText
-            android:id="@+id/etRegisterEmail"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Enter Email"
-            android:inputType="textEmailAddress"
-            android:background="#FBFB64"
-            android:padding="12dp"
-            android:layout_marginBottom="16dp"/>
+        <View
+            android:layout_width="112dp"
+            android:layout_height="112dp"
+            android:background="@drawable/bg_blob_circle"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentTop="true"
+            android:translationX="36dp"
+            android:translationY="-32dp" />
 
-        <!-- Password -->
-        <EditText
-            android:id="@+id/etRegisterPassword"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Enter Password"
-            android:inputType="textPassword"
-            android:background="#FBFB64"
-            android:padding="12dp"
-            android:layout_marginBottom="16dp"/>
-
-        <!-- Confirm Password -->
-        <EditText
-            android:id="@+id/etConfirmPassword"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Confirm Password"
-            android:inputType="textPassword"
-            android:background="#FBFB64"
-            android:padding="12dp"
-            android:layout_marginBottom="16dp"/>
-
-        <!-- Terms and Conditions -->
-
-        <!-- Create Account Button -->
-        <CheckBox
-            android:id="@+id/cbTerms"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp"
-            android:text="I accepted the Terms and Conditions" />
-
-        <Button
-            android:id="@+id/btnCreateAccount"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Create Account"
-            android:background="#FBFB64"
-            android:textColor="#000000"/>
-
-        <!-- Already have account -->
         <TextView
-            android:id="@+id/tvBackToLogin"
+            android:id="@+id/tvWelcome"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Already have an account?"
-            android:textSize="12sp"
-            android:layout_gravity="center"
-            android:layout_marginTop="20dp"/>
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="46dp"
+            android:fontFamily="sans-serif-light"
+            android:letterSpacing="0.10"
+            android:text="Welcome to EmpathTune"
+            android:textColor="#000000"
+            android:textSize="14sp" />
 
-    </LinearLayout>
+        <ImageView
+            android:id="@+id/imgLogo"
+            android:layout_width="72dp"
+            android:layout_height="64dp"
+            android:layout_below="@id/tvWelcome"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="20dp"
+            android:contentDescription="EmpathTune logo"
+            android:scaleType="fitCenter"
+            android:src="@drawable/applicationlogo" />
+
+    </RelativeLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:clipChildren="false"
+        android:clipToPadding="false">
+
+        <View
+            android:layout_width="140dp"
+            android:layout_height="140dp"
+            android:layout_gravity="bottom|start"
+            android:background="@drawable/bg_blob_circle"
+            android:translationX="-50dp"
+            android:translationY="50dp" />
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top|center_horizontal"
+            android:layout_marginStart="14dp"
+            android:layout_marginEnd="14dp"
+            android:layout_marginBottom="14dp"
+            app:cardBackgroundColor="#EFEFEF"
+            app:cardCornerRadius="24dp"
+            app:cardElevation="8dp"
+            app:cardPreventCornerOverlap="true">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingStart="22dp"
+                android:paddingEnd="22dp"
+                android:paddingTop="22dp"
+                android:paddingBottom="22dp">
+
+                <TextView
+                    android:id="@+id/tvRegisterTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginBottom="6dp"
+                    android:fontFamily="sans-serif-light"
+                    android:letterSpacing="0.10"
+                    android:text="Registeration"
+                    android:textColor="#000000"
+                    android:textSize="22sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginBottom="18dp"
+                    android:fontFamily="sans-serif-light"
+                    android:letterSpacing="0.04"
+                    android:text="Let&#8217;s amp your mood to a whole new level!"
+                    android:textColor="#555555"
+                    android:textSize="11sp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="46dp"
+                    android:layout_marginBottom="10dp"
+                    android:background="@drawable/bg_input_field"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:paddingStart="14dp"
+                    android:paddingEnd="14dp">
+
+                    <ImageView
+                        android:layout_width="18dp"
+                        android:layout_height="18dp"
+                        android:layout_marginEnd="10dp"
+                        android:contentDescription="Email icon"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/email" />
+
+                    <EditText
+                        android:id="@+id/etRegisterEmail"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@null"
+                        android:hint="Enter Email"
+                        android:inputType="textEmailAddress"
+                        android:textColor="#000000"
+                        android:textColorHint="#80000000"
+                        android:textSize="12sp"
+                        android:importantForAutofill="no" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="46dp"
+                    android:layout_marginBottom="10dp"
+                    android:background="@drawable/bg_input_field"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:paddingStart="14dp"
+                    android:paddingEnd="14dp">
+
+                    <ImageView
+                        android:layout_width="18dp"
+                        android:layout_height="18dp"
+                        android:layout_marginEnd="10dp"
+                        android:contentDescription="Username icon"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/username" />
+
+                    <EditText
+                        android:id="@+id/etRegisterUsername"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@null"
+                        android:hint="Username"
+                        android:inputType="textPersonName"
+                        android:textColor="#000000"
+                        android:textColorHint="#80000000"
+                        android:textSize="12sp"
+                        android:importantForAutofill="no" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="46dp"
+                    android:layout_marginBottom="10dp"
+                    android:background="@drawable/bg_input_field"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:paddingStart="14dp"
+                    android:paddingEnd="14dp">
+
+                    <ImageView
+                        android:layout_width="18dp"
+                        android:layout_height="18dp"
+                        android:layout_marginEnd="10dp"
+                        android:contentDescription="Confirm password icon"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/confirmpassword" />
+
+                    <EditText
+                        android:id="@+id/etConfirmPassword"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@null"
+                        android:hint="Confirm Password"
+                        android:inputType="textPassword"
+                        android:textColor="#000000"
+                        android:textColorHint="#80000000"
+                        android:textSize="12sp"
+                        android:importantForAutofill="no" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="46dp"
+                    android:layout_marginBottom="14dp"
+                    android:background="@drawable/bg_input_field"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:paddingStart="14dp"
+                    android:paddingEnd="14dp">
+
+                    <ImageView
+                        android:layout_width="18dp"
+                        android:layout_height="18dp"
+                        android:layout_marginEnd="10dp"
+                        android:contentDescription="Password icon"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/password" />
+
+                    <EditText
+                        android:id="@+id/etRegisterPassword"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@null"
+                        android:hint="Enter Password"
+                        android:inputType="textPassword"
+                        android:textColor="#000000"
+                        android:textColorHint="#80000000"
+                        android:textSize="12sp"
+                        android:importantForAutofill="no" />
+
+                </LinearLayout>
+
+                <CheckBox
+                    android:id="@+id/cbTerms"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="18dp"
+                    android:fontFamily="sans-serif-light"
+                    android:text="I accepted the Terms and Conditions"
+                    android:textColor="#333333"
+                    android:textSize="11sp" />
+
+                <Button
+                    android:id="@+id/btnCreateAccount"
+                    android:layout_width="match_parent"
+                    android:layout_height="46dp"
+                    android:layout_marginBottom="16dp"
+                    android:background="@drawable/bg_btn_create_account"
+                    android:backgroundTint="@null"
+                    android:fontFamily="sans-serif"
+                    android:letterSpacing="0.06"
+                    android:stateListAnimator="@null"
+                    android:text="Create Account"
+                    android:textColor="#111111"
+                    android:textSize="13sp" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tvBackToLogin"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="Already have an account?"
+                        android:textColor="#555555"
+                        android:textSize="11sp" />
+
+                    <TextView
+                        android:id="@+id/tvSignInLink"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:gravity="center"
+                        android:text="Sign in here!"
+                        android:textColor="#1A1A1A"
+                        android:textSize="13sp"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+    </FrameLayout>
 
 </LinearLayout>

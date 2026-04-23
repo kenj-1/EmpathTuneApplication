@@ -1,270 +1,710 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-    Dashboard Page — scaled for Small Phone API 36 (360 × 640 dp)
-    Original Figma frame: 402 × 874 dp  |  Scale X=0.895  Y=0.732
+    Dashboard Page — LinearLayout root
+    Keeps: R.id.iv_nav_icon (ImageView), R.id.tv_logout (TextView)
+    unchanged from DashboardActivity.kt
 -->
-<FrameLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/dashboard_bg">
+    android:orientation="vertical"
+    android:background="#FFFFFF">
 
-    <!-- Decorative background ellipses (partially off-screen, clipped) -->
-    <View
-        android:id="@+id/ellipse_top_left"
-        android:layout_width="@dimen/ellipse_bg_size"
-        android:layout_height="@dimen/ellipse_bg_size"
-        android:layout_gravity="top|start"
-        android:layout_marginStart="@dimen/ellipse_left_margin_start"
-        android:layout_marginTop="@dimen/ellipse_left_margin_top"
-        android:background="@drawable/shape_circle_yellow" />
-
-    <View
-        android:id="@+id/ellipse_top_right"
-        android:layout_width="@dimen/ellipse_bg_size"
-        android:layout_height="@dimen/ellipse_bg_size"
-        android:layout_gravity="top|end"
-        android:layout_marginEnd="@dimen/ellipse_right_margin_end"
-        android:layout_marginTop="@dimen/ellipse_right_margin_top"
-        android:background="@drawable/shape_circle_yellow" />
-
-    <!-- Bottom gradient board -->
-    <View
-        android:id="@+id/view_login_board"
+    <!-- ═══════════════════════════════════════════════
+         SCROLLABLE BODY (weight=1 pushes nav to bottom)
+         ═══════════════════════════════════════════════ -->
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="@dimen/board_height"
-        android:layout_gravity="bottom"
-        android:background="@drawable/shape_gradient_board" />
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:scrollbars="none"
+        android:fillViewport="true">
 
-    <!-- Main content LinearLayout -->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:clipToPadding="false">
-
-        <!-- Greeting text -->
-        <TextView
-            android:id="@+id/tv_greeting"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="@dimen/greeting_margin_top"
-            android:text="@string/greeting_text"
-            android:textSize="@dimen/greeting_text_size"
-            android:textColor="@color/text_black"
-            android:fontFamily="sans-serif-light"
-            android:gravity="center"
-            android:letterSpacing="0.2"
-            android:paddingStart="@dimen/greeting_padding_horizontal"
-            android:paddingEnd="@dimen/greeting_padding_horizontal" />
-
-        <!-- AutoPlayer circular button -->
-        <FrameLayout
-            android:id="@+id/fl_auto_player"
-            android:layout_width="@dimen/player_circle_size"
-            android:layout_height="@dimen/player_circle_size"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="@dimen/player_margin_top">
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/shape_circle_yellow_outer" />
-
-            <ImageView
-                android:id="@+id/iv_play_button"
-                android:layout_width="@dimen/player_inner_size"
-                android:layout_height="@dimen/player_inner_size"
-                android:layout_gravity="center"
-                android:background="@drawable/shape_circle_white"
-                android:src="@drawable/ic_play"
-                android:scaleType="center"
-                android:padding="@dimen/play_icon_padding"
-                android:contentDescription="@string/cd_play_button" />
-        </FrameLayout>
-
-        <!-- Feelings input box -->
-        <EditText
-            android:id="@+id/et_feelings"
-            android:layout_width="@dimen/input_box_width"
-            android:layout_height="@dimen/input_box_height"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="@dimen/input_margin_top"
-            android:background="@drawable/shape_input_background"
-            android:hint="@string/hint_feelings"
-            android:textColorHint="@color/text_hint"
-            android:textColor="@color/text_black"
-            android:textSize="@dimen/input_text_size"
-            android:fontFamily="sans-serif-light"
-            android:paddingStart="@dimen/input_padding_horizontal"
-            android:paddingEnd="@dimen/input_padding_horizontal"
-            android:paddingTop="@dimen/input_padding_vertical"
-            android:gravity="top|start"
-            android:inputType="textMultiLine"
-            android:maxLines="3" />
-
-        <!-- Song Player card -->
         <LinearLayout
-            android:id="@+id/ll_song_player"
-            android:layout_width="@dimen/song_player_width"
-            android:layout_height="@dimen/song_player_height"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="@dimen/song_player_margin_top"
-            android:orientation="vertical"
-            android:background="@drawable/shape_song_player_bg"
-            android:gravity="center_horizontal"
-            android:paddingTop="@dimen/song_player_padding_top"
-            android:paddingBottom="@dimen/song_player_padding_bottom"
-            android:paddingStart="@dimen/song_player_padding_horizontal"
-            android:paddingEnd="@dimen/song_player_padding_horizontal">
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-            <!-- Album art with dark overlay -->
-            <FrameLayout
-                android:layout_width="@dimen/album_art_size"
-                android:layout_height="@dimen/album_art_size">
+            <!-- ───────────────────────────────────────
+                 HEADER — decorative circles + greeting
+                 RelativeLayout needed for circle overlap
+                 ─────────────────────────────────────── -->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clipChildren="false"
+                android:clipToPadding="false"
+                android:background="#FFFFFF">
 
-                <ImageView
-                    android:id="@+id/iv_album_art"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:src="@drawable/ic_album_placeholder"
-                    android:scaleType="centerCrop"
-                    android:contentDescription="@string/cd_album_art" />
-
+                <!-- Top-right large yellow circle (Figma: Ellipse_11, x=177, y=-153, 244dp) -->
                 <View
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/shape_blur_overlay" />
-            </FrameLayout>
+                    android:layout_width="244dp"
+                    android:layout_height="244dp"
+                    android:background="@drawable/shape_circle_yellow"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentEnd="true"
+                    android:translationX="60dp"
+                    android:translationY="-110dp" />
 
-            <!-- Song title -->
-            <TextView
-                android:id="@+id/tv_song_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/song_title_margin_top"
-                android:text="@string/song_title"
-                android:textSize="@dimen/song_title_text_size"
-                android:textColor="@color/text_black"
-                android:fontFamily="sans-serif-light"
-                android:letterSpacing="0.2"
-                android:gravity="center" />
-
-            <!-- Playback controls -->
-            <LinearLayout
-                android:id="@+id/ll_controls"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/controls_margin_top"
-                android:orientation="horizontal"
-                android:gravity="center">
-
-                <ImageView
-                    android:id="@+id/iv_skip_back"
-                    android:layout_width="@dimen/control_icon_size"
-                    android:layout_height="@dimen/control_icon_size"
-                    android:src="@drawable/ic_skip_back"
-                    android:scaleType="fitCenter"
-                    android:contentDescription="@string/cd_skip_back" />
-
-                <ImageView
-                    android:id="@+id/iv_play_pause"
-                    android:layout_width="@dimen/control_play_size"
-                    android:layout_height="@dimen/control_play_size"
-                    android:layout_marginStart="@dimen/control_spacing"
-                    android:layout_marginEnd="@dimen/control_spacing"
-                    android:src="@drawable/ic_play"
-                    android:scaleType="fitCenter"
-                    android:contentDescription="@string/cd_play_pause" />
-
-                <ImageView
-                    android:id="@+id/iv_skip_forward"
-                    android:layout_width="@dimen/control_icon_size"
-                    android:layout_height="@dimen/control_icon_size"
-                    android:src="@drawable/ic_skip_forward"
-                    android:scaleType="fitCenter"
-                    android:contentDescription="@string/cd_skip_forward" />
-            </LinearLayout>
-
-            <!-- Progress seekbar -->
-            <SeekBar
-                android:id="@+id/seekbar_progress"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/seekbar_margin_top"
-                android:progressDrawable="@drawable/shape_seekbar_track"
-                android:thumb="@null"
-                android:max="100"
-                android:progress="0" />
-
-            <!-- Time indicators -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="@dimen/time_row_margin_top"
-                android:gravity="center_vertical">
-
-                <ImageView
-                    android:id="@+id/iv_time_start"
-                    android:layout_width="@dimen/time_icon_size"
-                    android:layout_height="@dimen/time_icon_size"
-                    android:src="@drawable/ic_time_indicator"
-                    android:contentDescription="@string/cd_time_start" />
-
+                <!-- Top-left medium yellow circle (Figma: Ellipse_12, x=-84, y=-232, 244dp) -->
                 <View
-                    android:layout_width="0dp"
+                    android:layout_width="244dp"
+                    android:layout_height="244dp"
+                    android:background="@drawable/shape_circle_yellow"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentStart="true"
+                    android:translationX="-75dp"
+                    android:translationY="-165dp" />
+
+                <!-- "How are we feeling today, user?" -->
+                <!-- Figma: fontSize=19, centered, y=57 -->
+                <TextView
+                    android:id="@+id/tv_greeting"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="42dp"
+                    android:text="How are we feeling\ntoday, user?"
+                    android:textSize="18sp"
+                    android:textColor="#000000"
+                    android:fontFamily="sans-serif-light"
+                    android:gravity="center"
+                    android:letterSpacing="0.05" />
+
+                <!-- Prompt input box (Figma: inner shadow, #D9D9D9 fill, y=167) -->
+                <EditText
+                    android:id="@+id/et_feelings"
+                    android:layout_width="match_parent"
+                    android:layout_height="72dp"
+                    android:layout_below="@id/tv_greeting"
+                    android:layout_marginTop="14dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginBottom="14dp"
+                    android:background="@drawable/shape_input_background"
+                    android:hint="Type what you feel here..."
+                    android:textColorHint="#80000000"
+                    android:textColor="#000000"
+                    android:textSize="8sp"
+                    android:fontFamily="sans-serif-light"
+                    android:paddingStart="14dp"
+                    android:paddingEnd="14dp"
+                    android:paddingTop="10dp"
+                    android:gravity="top|start"
+                    android:inputType="textMultiLine"
+                    android:maxLines="3" />
+
+                <!-- Invisible bottom anchor so RelativeLayout has correct height -->
+                <View
+                    android:id="@+id/header_bottom_anchor"
+                    android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:layout_weight="1" />
+                    android:layout_below="@id/et_feelings" />
 
-                <ImageView
-                    android:id="@+id/iv_time_end"
-                    android:layout_width="@dimen/time_icon_size"
-                    android:layout_height="@dimen/time_icon_size"
-                    android:src="@drawable/ic_time_indicator"
-                    android:contentDescription="@string/cd_time_end" />
+            </RelativeLayout>
+
+            <!-- ───────────────────────────────────────
+                 GRADIENT CONTENT AREA
+                 Figma: shape_gradient_board yellow→gray
+                 ─────────────────────────────────────── -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@drawable/shape_gradient_board"
+                android:paddingTop="6dp"
+                android:paddingBottom="16dp">
+
+                <!-- AutoPlayer circle (Figma: Ellipse_9 + PlayButton, y=270) -->
+                <FrameLayout
+                    android:id="@+id/fl_auto_player"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginBottom="10dp">
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/shape_circle_yellow_outer" />
+
+                    <ImageView
+                        android:id="@+id/iv_play_button"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_gravity="center"
+                        android:background="@drawable/shape_circle_white"
+                        android:src="@drawable/ic_play"
+                        android:scaleType="center"
+                        android:padding="8dp"
+                        android:contentDescription="Auto play" />
+                </FrameLayout>
+
+                <!-- "How do you want to listen, user?" (Figma: y=344, 10sp) -->
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="How do you want to listen, user? We are open ears....."
+                    android:textSize="8sp"
+                    android:textColor="#000000"
+                    android:fontFamily="sans-serif-light"
+                    android:gravity="center"
+                    android:paddingStart="14dp"
+                    android:paddingEnd="14dp"
+                    android:layout_marginBottom="7dp" />
+
+                <!-- "Are we feeling......." (Figma: y=384, 10sp, left-aligned) -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Are we feeling......."
+                    android:textSize="8sp"
+                    android:textColor="#000000"
+                    android:fontFamily="sans-serif-light"
+                    android:paddingStart="14dp"
+                    android:layout_marginBottom="7dp" />
+
+                <!-- ── Mood chips: Happy | Love | Sad (Figma: y=417) ── -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingStart="12dp"
+                    android:paddingEnd="12dp"
+                    android:layout_marginBottom="7dp">
+
+                    <!-- Happy chip -->
+                    <LinearLayout
+                        android:id="@+id/chip_happy"
+                        android:layout_width="0dp"
+                        android:layout_height="28dp"
+                        android:layout_weight="1"
+                        android:orientation="horizontal"
+                        android:background="@drawable/shape_btn_yellow"
+                        android:gravity="center"
+                        android:layout_marginEnd="4dp"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:elevation="2dp">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Happy"
+                            android:textSize="8sp"
+                            android:textColor="#000000"
+                            android:fontFamily="sans-serif-light" />
+                        <ImageView
+                            android:layout_width="16dp"
+                            android:layout_height="16dp"
+                            android:src="@drawable/happy"
+                            android:layout_marginStart="4dp"
+                            android:contentDescription="Happy" />
+                    </LinearLayout>
+
+                    <!-- Love chip -->
+                    <LinearLayout
+                        android:id="@+id/chip_love"
+                        android:layout_width="0dp"
+                        android:layout_height="28dp"
+                        android:layout_weight="1"
+                        android:orientation="horizontal"
+                        android:background="@drawable/shape_btn_yellow"
+                        android:gravity="center"
+                        android:layout_marginStart="4dp"
+                        android:layout_marginEnd="4dp"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:elevation="2dp">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Love"
+                            android:textSize="8sp"
+                            android:textColor="#000000"
+                            android:fontFamily="sans-serif-light" />
+                        <ImageView
+                            android:layout_width="16dp"
+                            android:layout_height="16dp"
+                            android:src="@drawable/heart"
+                            android:layout_marginStart="4dp"
+                            android:contentDescription="Love" />
+                    </LinearLayout>
+
+                    <!-- Sad chip -->
+                    <LinearLayout
+                        android:id="@+id/chip_sad"
+                        android:layout_width="0dp"
+                        android:layout_height="28dp"
+                        android:layout_weight="1"
+                        android:orientation="horizontal"
+                        android:background="@drawable/shape_btn_yellow"
+                        android:gravity="center"
+                        android:layout_marginStart="4dp"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:elevation="2dp">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Sad"
+                            android:textSize="8sp"
+                            android:textColor="#000000"
+                            android:fontFamily="sans-serif-light" />
+                        <ImageView
+                            android:layout_width="16dp"
+                            android:layout_height="16dp"
+                            android:src="@drawable/sad"
+                            android:layout_marginStart="4dp"
+                            android:contentDescription="Sad" />
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <!-- "What mood are we feeling today?" (Figma: y=467, 10sp) -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="What mood are we feeling today?"
+                    android:textSize="8sp"
+                    android:textColor="#000000"
+                    android:fontFamily="sans-serif-light"
+                    android:paddingStart="14dp"
+                    android:layout_marginBottom="7dp" />
+
+                <!-- ── Playlist cards: Gym Mood + Study Mood (Figma: y=490, h=122) ── -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingStart="14dp"
+                    android:paddingEnd="14dp"
+                    android:layout_marginBottom="10dp">
+
+                    <!-- Gym Mood card -->
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/card_gym_mood"
+                        android:layout_width="0dp"
+                        android:layout_height="96dp"
+                        android:layout_weight="1"
+                        android:layout_marginEnd="6dp"
+                        app:cardCornerRadius="18dp"
+                        app:cardElevation="4dp"
+                        app:cardBackgroundColor="#EDDA0A">
+
+                        <FrameLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <ImageView
+                                android:id="@+id/iv_gym_art"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:src="@drawable/ic_album_placeholder"
+                                android:scaleType="centerCrop"
+                                android:contentDescription="Gym Mood album art" />
+
+                            <!-- Figma: Gym Mood label, 7sp, center-top -->
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Gym Mood"
+                                android:textSize="6sp"
+                                android:textColor="#000000"
+                                android:fontFamily="sans-serif-light"
+                                android:layout_gravity="top|center_horizontal"
+                                android:layout_marginTop="6dp" />
+
+                            <!-- Figma: play circle, bottom-right -->
+                            <FrameLayout
+                                android:id="@+id/iv_play_gym"
+                                android:layout_width="28dp"
+                                android:layout_height="28dp"
+                                android:layout_gravity="bottom|end"
+                                android:layout_margin="6dp"
+                                android:clickable="true"
+                                android:focusable="true">
+                                <View
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:background="@drawable/shape_circle_yellow_outer" />
+                                <ImageView
+                                    android:layout_width="20dp"
+                                    android:layout_height="20dp"
+                                    android:layout_gravity="center"
+                                    android:src="@drawable/ic_play"
+                                    android:background="@drawable/shape_circle_white"
+                                    android:padding="4dp"
+                                    android:scaleType="fitCenter"
+                                    android:contentDescription="Play gym mood" />
+                            </FrameLayout>
+
+                        </FrameLayout>
+                    </androidx.cardview.widget.CardView>
+
+                    <!-- Study Mood card -->
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/card_study_mood"
+                        android:layout_width="0dp"
+                        android:layout_height="96dp"
+                        android:layout_weight="1"
+                        android:layout_marginStart="6dp"
+                        app:cardCornerRadius="18dp"
+                        app:cardElevation="4dp"
+                        app:cardBackgroundColor="#EDDA0A">
+
+                        <FrameLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <ImageView
+                                android:id="@+id/iv_study_art"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:src="@drawable/ic_album_placeholder"
+                                android:scaleType="centerCrop"
+                                android:contentDescription="Study Mood album art" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Study Mood"
+                                android:textSize="6sp"
+                                android:textColor="#000000"
+                                android:fontFamily="sans-serif-light"
+                                android:layout_gravity="top|center_horizontal"
+                                android:layout_marginTop="6dp" />
+
+                            <FrameLayout
+                                android:id="@+id/iv_play_study"
+                                android:layout_width="28dp"
+                                android:layout_height="28dp"
+                                android:layout_gravity="bottom|end"
+                                android:layout_margin="6dp"
+                                android:clickable="true"
+                                android:focusable="true">
+                                <View
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:background="@drawable/shape_circle_yellow_outer" />
+                                <ImageView
+                                    android:layout_width="20dp"
+                                    android:layout_height="20dp"
+                                    android:layout_gravity="center"
+                                    android:src="@drawable/ic_play"
+                                    android:background="@drawable/shape_circle_white"
+                                    android:padding="4dp"
+                                    android:scaleType="fitCenter"
+                                    android:contentDescription="Play study mood" />
+                            </FrameLayout>
+
+                        </FrameLayout>
+                    </androidx.cardview.widget.CardView>
+
+                </LinearLayout>
+
+                <!-- ── Song Player card (Figma: SongPlayer, y=638, h=107) ── -->
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/ll_song_player"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    app:cardCornerRadius="20dp"
+                    app:cardElevation="4dp"
+                    app:cardBackgroundColor="#BBBBBB">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:paddingStart="12dp"
+                        android:paddingEnd="12dp"
+                        android:paddingTop="8dp"
+                        android:paddingBottom="8dp">
+
+                        <!-- "You're in love...." pill tag (Figma: y=626, yellow) -->
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="You're in love...."
+                            android:textSize="6sp"
+                            android:textColor="#000000"
+                            android:fontFamily="sans-serif-light"
+                            android:background="@drawable/shape_btn_yellow"
+                            android:paddingStart="10dp"
+                            android:paddingEnd="10dp"
+                            android:paddingTop="3dp"
+                            android:paddingBottom="3dp"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_marginBottom="8dp" />
+
+                        <!-- Song info row: left details + right album art -->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:gravity="center_vertical">
+
+                            <!-- Left: title, artist, album, seekbar, controls -->
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:orientation="vertical">
+
+                                <!-- Song title (Figma: "Naiilang", 8sp bold) -->
+                                <TextView
+                                    android:id="@+id/tv_song_title"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Naiilang"
+                                    android:textSize="8sp"
+                                    android:textStyle="bold"
+                                    android:textColor="#000000"
+                                    android:letterSpacing="0.10" />
+
+                                <!-- Artist (Figma: "Le John", 6sp, 35% opacity) -->
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Le John"
+                                    android:textSize="6sp"
+                                    android:textColor="#59000000"
+                                    android:fontFamily="sans-serif-light"
+                                    android:letterSpacing="0.10" />
+
+                                <!-- Album name (Figma: "Naiilang", 6sp, 35% opacity) -->
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Naiilang"
+                                    android:textSize="6sp"
+                                    android:textColor="#59000000"
+                                    android:fontFamily="sans-serif-light"
+                                    android:letterSpacing="0.10"
+                                    android:layout_marginBottom="5dp" />
+
+                                <!-- Progress seekbar (Figma: Rectangle_8 white progress) -->
+                                <SeekBar
+                                    android:id="@+id/seekbar_progress"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="8dp"
+                                    android:progressDrawable="@drawable/shape_seekbar_track"
+                                    android:thumb="@null"
+                                    android:max="100"
+                                    android:progress="84" />
+
+                                <!-- Time row: 0:00 ... 4:07 -->
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal"
+                                    android:layout_marginTop="2dp"
+                                    android:layout_marginBottom="4dp">
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="0:00"
+                                        android:textSize="5sp"
+                                        android:textColor="#59000000"
+                                        android:fontFamily="sans-serif-light" />
+                                    <View
+                                        android:layout_width="0dp"
+                                        android:layout_height="1dp"
+                                        android:layout_weight="1" />
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="4:07"
+                                        android:textSize="5sp"
+                                        android:textColor="#59000000"
+                                        android:fontFamily="sans-serif-light" />
+                                </LinearLayout>
+
+                                <!-- Playback controls (Figma: shuffle|prev|play|next|repeat) -->
+                                <LinearLayout
+                                    android:id="@+id/ll_controls"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal"
+                                    android:gravity="center_vertical">
+
+                                    <ImageView
+                                        android:id="@+id/iv_shuffle"
+                                        android:layout_width="12dp"
+                                        android:layout_height="12dp"
+                                        android:src="@drawable/shuffle"
+                                        android:scaleType="fitCenter"
+                                        android:contentDescription="Shuffle" />
+
+                                    <ImageView
+                                        android:id="@+id/iv_skip_back"
+                                        android:layout_width="12dp"
+                                        android:layout_height="12dp"
+                                        android:src="@drawable/ic_skip_back"
+                                        android:scaleType="fitCenter"
+                                        android:layout_marginStart="8dp"
+                                        android:contentDescription="Previous" />
+
+                                    <ImageView
+                                        android:id="@+id/iv_play_pause"
+                                        android:layout_width="16dp"
+                                        android:layout_height="16dp"
+                                        android:src="@drawable/ic_play"
+                                        android:scaleType="fitCenter"
+                                        android:layout_marginStart="8dp"
+                                        android:contentDescription="Play / Pause" />
+
+                                    <ImageView
+                                        android:id="@+id/iv_skip_forward"
+                                        android:layout_width="12dp"
+                                        android:layout_height="12dp"
+                                        android:src="@drawable/ic_skip_forward"
+                                        android:scaleType="fitCenter"
+                                        android:layout_marginStart="8dp"
+                                        android:contentDescription="Next" />
+
+                                    <ImageView
+                                        android:id="@+id/iv_repeat"
+                                        android:layout_width="12dp"
+                                        android:layout_height="12dp"
+                                        android:src="@drawable/repeat"
+                                        android:scaleType="fitCenter"
+                                        android:layout_marginStart="8dp"
+                                        android:contentDescription="Repeat" />
+
+                                </LinearLayout>
+
+                                <!-- Volume row -->
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal"
+                                    android:gravity="center_vertical"
+                                    android:layout_marginTop="4dp">
+
+                                    <ImageView
+                                        android:layout_width="8dp"
+                                        android:layout_height="8dp"
+                                        android:src="@drawable/volumelow"
+                                        android:scaleType="fitCenter"
+                                        android:contentDescription="Volume low" />
+
+                                    <SeekBar
+                                        android:id="@+id/seekbar_volume"
+                                        android:layout_width="0dp"
+                                        android:layout_height="8dp"
+                                        android:layout_weight="1"
+                                        android:layout_marginStart="4dp"
+                                        android:layout_marginEnd="4dp"
+                                        android:progressDrawable="@drawable/shape_seekbar_track"
+                                        android:thumb="@null"
+                                        android:max="100"
+                                        android:progress="60" />
+
+                                    <ImageView
+                                        android:layout_width="8dp"
+                                        android:layout_height="8dp"
+                                        android:src="@drawable/volumehigh"
+                                        android:scaleType="fitCenter"
+                                        android:contentDescription="Volume high" />
+
+                                </LinearLayout>
+
+                            </LinearLayout>
+
+                            <!-- Right: album art (Figma: image_22, 82×82dp) -->
+                            <ImageView
+                                android:id="@+id/iv_album_art"
+                                android:layout_width="66dp"
+                                android:layout_height="66dp"
+                                android:layout_marginStart="10dp"
+                                android:src="@drawable/ic_album_placeholder"
+                                android:scaleType="centerCrop"
+                                android:contentDescription="Album art" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
             </LinearLayout>
+            <!-- end gradient content area -->
 
         </LinearLayout>
+    </ScrollView>
 
-        <!-- Spacer pushes bottom nav down -->
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1" />
+    <!-- ═══════════════════════════════════════════════
+         BOTTOM NAVIGATION BAR
+         Figma: HomeNavigation — yellow bar, 3 icons,
+         center home icon sits on a raised white circle.
 
-        <!-- Bottom navigation bar -->
+         IDs preserved from DashboardActivity.kt:
+           tv_logout   → TextView (left nav tap → logout)
+           iv_nav_icon → ImageView (right nav tap → Profile)
+         ═══════════════════════════════════════════════ -->
+    <LinearLayout
+        android:id="@+id/fl_bottom_nav"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:orientation="horizontal"
+        android:background="@drawable/shape_bottom_nav"
+        android:gravity="center_vertical">
+
+        <!-- Left nav item — tv_logout kept as TextView; drawableTop renders the icon -->
+        <TextView
+            android:id="@+id/tv_logout"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text=""
+            android:drawableTop="@drawable/ic_nav_create"
+            android:drawablePadding="0dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:background="?attr/selectableItemBackgroundBorderless" />
+
+        <!-- Center nav item — Home icon on raised white circle (Figma: Ellipse_18) -->
         <FrameLayout
-            android:id="@+id/fl_bottom_nav"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/bottom_nav_height"
-            android:background="@drawable/shape_bottom_nav">
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
 
-            <!-- Logout: left side, vertically centered -->
-            <TextView
-                android:id="@+id/tv_logout"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="start|center_vertical"
-                android:layout_marginStart="@dimen/nav_text_margin_start"
-                android:text="@string/logout"
-                android:textSize="@dimen/nav_text_size"
-                android:textColor="@color/text_black"
-                android:fontFamily="sans-serif-light"
-                android:letterSpacing="0.2" />
+            <!-- White circle behind home icon (Figma: Ellipse_18, 63dp, glowing shadow) -->
+            <View
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_gravity="center"
+                android:background="@drawable/shape_circle_white_nav" />
 
-            <!-- Nav icon: right side, vertically centered -->
             <ImageView
-                android:id="@+id/iv_nav_icon"
-                android:layout_width="@dimen/nav_icon_size"
-                android:layout_height="@dimen/nav_icon_size"
-                android:layout_gravity="end|center_vertical"
-                android:layout_marginEnd="@dimen/nav_icon_margin_end"
-                android:src="@drawable/ic_nav_icon"
+                android:id="@+id/iv_home"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_home"
                 android:scaleType="fitCenter"
-                android:contentDescription="@string/cd_nav_icon" />
+                android:contentDescription="Home" />
+
         </FrameLayout>
 
+        <!-- Right nav item — Profile icon (ImageView, kept from DashboardActivity.kt) -->
+        <ImageView
+            android:id="@+id/iv_nav_icon"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:src="@drawable/username"
+            android:scaleType="center"
+            android:padding="14dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="Profile" />
+
     </LinearLayout>
-</FrameLayout>
+
+</LinearLayout>
