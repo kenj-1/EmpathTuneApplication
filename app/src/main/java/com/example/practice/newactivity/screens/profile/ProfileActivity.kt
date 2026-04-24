@@ -1,10 +1,9 @@
-package com.example.practice.newactivity
+package com.example.practice.newactivity.screens.profile
 
 import android.app.Activity
-import android.content.Intent
 import android.os.Bundle
 import android.widget.ImageView
-import android.widget.TextView
+import com.example.practice.newactivity.R
 
 class ProfileActivity : Activity() {
     override fun onCreate(savedInstanceState: Bundle?) {

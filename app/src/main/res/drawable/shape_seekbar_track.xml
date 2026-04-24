@@ -1,6 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+    shape_seekbar_track.xml
+    Figma: Rectangle_8 (white progress) over Rectangle_9 (translucent track)
+    progress  → white filled portion
+    background → semi-transparent white track
+-->
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:id="@android:id/background"><shape android:shape="rectangle"><solid android:color="@color/seekbar_track"/><corners android:radius="30dp"/><size android:height="2dp"/></shape></item>
-    <item android:id="@android:id/secondaryProgress"><clip><shape android:shape="rectangle"><solid android:color="@color/seekbar_track"/><corners android:radius="30dp"/><size android:height="2dp"/></shape></clip></item>
-    <item android:id="@android:id/progress"><clip><shape android:shape="rectangle"><solid android:color="@color/text_white"/><corners android:radius="30dp"/><size android:height="2dp"/></shape></clip></item>
+
+    <!-- Track background: Figma Rectangle_9, white at 28% opacity, stroke at 36% -->
+    <item android:id="@android:id/background">
+        <shape android:shape="rectangle">
+            <corners android:radius="30dp" />
+            <solid android:color="#47FFFFFF" />
+        </shape>
+    </item>
+
+    <!-- Secondary progress (unused, kept transparent) -->
+    <item android:id="@android:id/secondaryProgress">
+        <clip>
+            <shape android:shape="rectangle">
+                <corners android:radius="30dp" />
+                <solid android:color="#00000000" />
+            </shape>
+        </clip>
+    </item>
+
+    <!-- Progress fill: Figma Rectangle_8 — solid white -->
+    <item android:id="@android:id/progress">
+        <clip>
+            <shape android:shape="rectangle">
+                <corners android:radius="30dp" />
+                <solid android:color="#FFFFFF" />
+            </shape>
+        </clip>
+    </item>
+
 </layer-list>

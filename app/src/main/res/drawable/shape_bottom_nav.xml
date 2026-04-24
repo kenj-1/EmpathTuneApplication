@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle">
-    <solid android:color="@color/yellow_nav"/>
-    <corners android:topLeftRadius="27dp" android:topRightRadius="27dp" android:bottomLeftRadius="0dp" android:bottomRightRadius="0dp"/>
+<!--
+    shape_bottom_nav.xml
+    Figma: Vector_1 (HomeNavigation) — fill #E9EE67 (yellow-green)
+    The nav bar background; the wave/bump shape is approximated
+    as a flat rectangle since Android XML cannot replicate the SVG path.
+-->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+
+    <solid android:color="#E9EE67" />
+
 </shape>

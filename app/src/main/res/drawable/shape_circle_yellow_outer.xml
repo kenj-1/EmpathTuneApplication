@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
     shape_circle_yellow_outer.xml
-    Used by: Ellipse_9 inside AutoPlayer group (id="33:2")
-    Color: #f2fb41 at 75% opacity, with a soft drop shadow via elevation
+    Figma: Ellipse_9 (AutoPlayer) — fill #F2FB41 at 75% opacity
+    Used as the outer ring of the play button circle.
 -->
 <shape xmlns:android="http://schemas.android.com/apk/res/android"
     android:shape="oval">
-    <solid android:color="@color/yellow_accent" />
+
+    <solid android:color="#BFF2FB41" />
+
 </shape>

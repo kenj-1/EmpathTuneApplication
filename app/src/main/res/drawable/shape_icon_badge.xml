@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    shape_icon_badge.xml
+    Used as background for the person/lock icons inside the input fields.
+
+    Figma spec (Ellipse_13 behind each input icon):
+      - Oval / circle
+      - fill: #BEC323 (olive-yellow)
+      - size: ~27dp diameter in Figma, scaled to ~22dp at 360dp screen width
+      - The icon itself is a masked image layered on top
+-->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="oval">
+
+    <solid android:color="#BEC323" />
+
+</shape>

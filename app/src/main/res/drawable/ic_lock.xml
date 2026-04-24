@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    ic_lock.xml
+    Padlock icon for the Password input field.
+    Replace with your actual asset if available.
+
+    Figma: imageHash e846272b953b72e36814781913fe4f2c04bc9646
+-->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+
+    <!-- Shackle (top arc of lock) -->
+    <path
+        android:strokeColor="#FFFFFF"
+        android:strokeWidth="2"
+        android:fillColor="@android:color/transparent"
+        android:pathData="M8,11 L8,7 A4,4 0,0 1,16 7 L16,11" />
+
+    <!-- Lock body rectangle -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M6,11 L18,11 A2,2 0,0 1,20 13 L20,20 A2,2 0,0 1,18 22 L6,22 A2,2 0,0 1,4 20 L4,13 A2,2 0,0 1,6 11 Z" />
+
+    <!-- Keyhole dot -->
+    <path
+        android:fillColor="#BEC323"
+        android:pathData="M12,16m-1.5,0a1.5,1.5 0,1 1,3 0a1.5,1.5 0,1 1,-3 0" />
+
+</vector>

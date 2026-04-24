@@ -1,128 +1,309 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#FFFFFF"
-    android:padding="24dp">
+    android:background="#FFFFFF">
 
-    <!-- Welcome Text -->
-    <TextView
-        android:id="@+id/tvWelcome"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Welcome to EmpathTune"
-        android:textSize="16sp"
-        android:layout_gravity="center"
-        android:layout_marginTop="40dp"/>
-
-    <!-- Logo -->
-    <ImageView
-        android:id="@+id/imgLogo"
-        android:layout_width="90dp"
-        android:layout_height="81dp"
-        android:layout_gravity="center"
-        android:layout_marginTop="20dp"/>
-        <!--android:src="@drawable/app_logo"-->
-
-    <!-- Login Card -->
-    <LinearLayout
+    <!-- Header section: decorative circles + welcome text + logo -->
+    <!-- RelativeLayout is needed here only because circles overlap/clip off-screen -->
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:background="#BBBBBB"
-        android:padding="24dp"
-        android:layout_marginTop="40dp">
+        android:clipChildren="false"
+        android:clipToPadding="false">
 
-        <!-- Title -->
+        <!-- Top-left decorative circle (partially off-screen) -->
+        <View
+            android:id="@+id/circleTopLeft"
+            android:layout_width="204dp"
+            android:layout_height="204dp"
+            android:background="@drawable/shape_circle_yellow"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:translationX="-55dp"
+            android:translationY="-82dp" />
+
+        <!-- "Welcome to EmpathTune" -->
         <TextView
-            android:id="@+id/tvLoginTitle"
+            android:id="@+id/tvWelcome"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Log In"
-            android:textSize="20sp"
-            android:layout_gravity="center"
-            android:layout_marginBottom="20dp"/>
+            android:text="Welcome to EmpathTune"
+            android:textSize="14sp"
+            android:letterSpacing="0.10"
+            android:textColor="#000000"
+            android:fontFamily="sans-serif-light"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="47dp" />
 
-        <!-- Username -->
-        <EditText
-            android:id="@+id/etUsername"
+        <!-- App Logo -->
+        <ImageView
+            android:id="@+id/imgLogo"
+            android:layout_width="64dp"
+            android:layout_height="58dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/applicationlogo"
+            android:contentDescription="EmpathTune logo"
+            android:layout_below="@id/tvWelcome"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="14dp"
+            android:layout_marginBottom="22dp" />
+
+    </RelativeLayout>
+
+    <!-- Login Card -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardLogin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="22dp"
+        app:cardElevation="4dp"
+        app:cardBackgroundColor="#BBBBBB"
+        app:cardPreventCornerOverlap="true"
+        android:layout_marginStart="14dp"
+        android:layout_marginEnd="14dp">
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Username"
-            android:background="#FBFB64"
-            android:padding="12dp"
-            android:layout_marginBottom="16dp"/>
+            android:orientation="vertical"
+            android:paddingStart="22dp"
+            android:paddingEnd="22dp"
+            android:paddingTop="18dp"
+            android:paddingBottom="22dp">
 
-        <!-- Password -->
-        <EditText
-            android:id="@+id/etPassword"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Password"
-            android:inputType="textPassword"
-            android:background="#FBFB64"
-            android:padding="12dp"
-            android:layout_marginBottom="8dp"/>
+            <!-- Log In Title -->
+            <TextView
+                android:id="@+id/tvLogInTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Log In"
+                android:textSize="17sp"
+                android:letterSpacing="0.08"
+                android:textColor="#000000"
+                android:fontFamily="sans-serif-light"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="18dp" />
 
-        <!-- Forgot Password -->
-        <TextView
-            android:id="@+id/tvForgotPassword"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Forgot Password?"
-            android:textSize="10sp"
-            android:layout_gravity="end"
-            android:layout_marginBottom="20dp"/>
+            <!-- Username Field -->
+            <LinearLayout
+                android:id="@+id/layoutUsername"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:orientation="horizontal"
+                android:background="@drawable/shape_input_field"
+                android:gravity="center_vertical"
+                android:paddingStart="10dp"
+                android:paddingEnd="12dp"
+                android:layout_marginBottom="11dp">
 
-        <!-- Login Button -->
+                <ImageView
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:src="@drawable/username"
+                    android:background="@drawable/shape_icon_badge"
+                    android:padding="4dp"
+                    android:layout_marginEnd="8dp"
+                    android:contentDescription="Username icon" />
 
-        <!-- Login with -->
-        <Button
-            android:id="@+id/btnLogin"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="#FBFB64"
-            android:text="Log In"
-            android:textColor="#000000" />
+                <EditText
+                    android:id="@+id/etUsername"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:hint="Username"
+                    android:textSize="11sp"
+                    android:letterSpacing="0.05"
+                    android:textColor="#000000"
+                    android:textColorHint="#80000000"
+                    android:fontFamily="sans-serif-light"
+                    android:background="@null"
+                    android:gravity="center_vertical"
+                    android:inputType="text"
+                    android:maxLines="1"
+                    android:importantForAutofill="no" />
 
-        <TextView
-            android:id="@+id/btnNoAccountClickherePlease"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="No Account? Click here"
-            android:textSize="12sp"
-            android:layout_gravity="center"
-            android:layout_marginTop="20dp"/>
+            </LinearLayout>
 
-        <!-- Google Button -->
-        <Button
-            android:id="@+id/btnGoogle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Google"
-            android:layout_marginTop="10dp"
-            android:background="#FBFB64"/>
+            <!-- Password Field -->
+            <LinearLayout
+                android:id="@+id/layoutPassword"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:orientation="horizontal"
+                android:background="@drawable/shape_input_field"
+                android:gravity="center_vertical"
+                android:paddingStart="10dp"
+                android:paddingEnd="12dp"
+                android:layout_marginBottom="5dp">
 
-        <!-- Spotify Button -->
-        <Button
-            android:id="@+id/btnSpotify"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Spotify"
-            android:layout_marginTop="10dp"
-            android:background="#FBFB64"/>
+                <ImageView
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:src="@drawable/password"
+                    android:background="@drawable/shape_icon_badge"
+                    android:padding="4dp"
+                    android:layout_marginEnd="8dp"
+                    android:contentDescription="Password icon" />
 
-        <!-- Register -->
-        <TextView
-            android:id="@+id/tvRegister"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="No Account? Click here"
-            android:textSize="10sp"
-            android:layout_gravity="center"
-            android:layout_marginTop="20dp"/>
+                <EditText
+                    android:id="@+id/etPassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:hint="Password"
+                    android:textSize="11sp"
+                    android:letterSpacing="0.05"
+                    android:textColor="#000000"
+                    android:textColorHint="#80000000"
+                    android:fontFamily="sans-serif-light"
+                    android:background="@null"
+                    android:gravity="center_vertical"
+                    android:inputType="textPassword"
+                    android:maxLines="1"
+                    android:importantForAutofill="no" />
 
-    </LinearLayout>
+            </LinearLayout>
+
+            <!-- Forgot Password -->
+            <TextView
+                android:id="@+id/tvForgotPassword"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Forgot Password?"
+                android:textSize="9sp"
+                android:letterSpacing="0.05"
+                android:textColor="#000000"
+                android:fontFamily="sans-serif-light"
+                android:layout_gravity="end"
+                android:layout_marginBottom="14dp" />
+
+            <!-- Sign In Button -->
+
+            <!-- Login with label -->
+            <Button
+                android:id="@+id/btnLogin"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginBottom="18dp"
+                android:background="@drawable/shape_btn_yellow"
+                android:fontFamily="sans-serif-light"
+                android:letterSpacing="0.05"
+                android:stateListAnimator="@null"
+                android:text="Sign In"
+                android:textColor="#000000"
+                android:textSize="11sp" />
+
+            <TextView
+                android:id="@+id/tvLoginWith"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Login with"
+                android:textSize="10sp"
+                android:letterSpacing="0.05"
+                android:textColor="#000000"
+                android:fontFamily="sans-serif-light"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="10dp" />
+
+            <!-- Google Button -->
+            <LinearLayout
+                android:id="@+id/btnGoogle"
+                android:layout_width="120dp"
+                android:layout_height="27dp"
+                android:orientation="horizontal"
+                android:background="@drawable/shape_btn_social"
+                android:gravity="center"
+                android:paddingStart="12dp"
+                android:paddingEnd="8dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="7dp"
+                android:clickable="true"
+                android:focusable="true">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Google"
+                    android:textSize="8sp"
+                    android:letterSpacing="0.05"
+                    android:textColor="#000000"
+                    android:fontFamily="sans-serif-light" />
+
+                <ImageView
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:src="@drawable/ic_google"
+                    android:layout_marginStart="6dp"
+                    android:contentDescription="Google" />
+
+            </LinearLayout>
+
+            <!-- Spotify Button -->
+            <LinearLayout
+                android:id="@+id/btnSpotify"
+                android:layout_width="120dp"
+                android:layout_height="27dp"
+                android:orientation="horizontal"
+                android:background="@drawable/shape_btn_social"
+                android:gravity="center"
+                android:paddingStart="12dp"
+                android:paddingEnd="8dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="14dp"
+                android:clickable="true"
+                android:focusable="true">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Spotify"
+                    android:textSize="8sp"
+                    android:letterSpacing="0.05"
+                    android:textColor="#000000"
+                    android:fontFamily="sans-serif-light" />
+
+                <ImageView
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:src="@drawable/ic_spotify"
+                    android:layout_marginStart="6dp"
+                    android:contentDescription="Spotify" />
+
+            </LinearLayout>
+
+            <!-- No Account? Register here -->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_gravity="center_horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="No Account? "
+                    android:textSize="9sp"
+                    android:letterSpacing="0.05"
+                    android:textColor="#000000"
+                    android:fontFamily="sans-serif-light" />
+
+                <TextView
+                    android:id="@+id/tvRegister"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Register here"
+                    android:textSize="9sp"
+                    android:letterSpacing="0.05"
+                    android:textColor="#000000"
+                    android:textStyle="bold"
+                    android:clickable="true"
+                    android:focusable="true" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
 
 </LinearLayout>

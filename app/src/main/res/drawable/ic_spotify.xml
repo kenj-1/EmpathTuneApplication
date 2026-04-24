@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    ic_spotify.xml
+    Spotify logo approximation (three curved lines on a green circle).
+    Replace with the official Spotify branding asset if publishing.
+
+    Figma: imageHash 6edf5526257efcfdfac13f67310bee279a54186f
+-->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+
+    <!-- Green background circle -->
+    <path
+        android:fillColor="#1DB954"
+        android:pathData="M12,2A10,10 0,0 0,2 12A10,10 0,0 0,12 22A10,10 0,0 0,22 12A10,10 0,0 0,12 2Z" />
+
+    <!-- Top sound wave arc -->
+    <path
+        android:strokeColor="#FFFFFF"
+        android:strokeWidth="1.5"
+        android:strokeLineCap="round"
+        android:fillColor="@android:color/transparent"
+        android:pathData="M7.5,9.5 C9.5,8.5 14.5,8.5 16.5,9.5" />
+
+    <!-- Middle sound wave arc -->
+    <path
+        android:strokeColor="#FFFFFF"
+        android:strokeWidth="1.5"
+        android:strokeLineCap="round"
+        android:fillColor="@android:color/transparent"
+        android:pathData="M8,12 C10,11 14,11 16,12" />
+
+    <!-- Bottom sound wave arc -->
+    <path
+        android:strokeColor="#FFFFFF"
+        android:strokeWidth="1.5"
+        android:strokeLineCap="round"
+        android:fillColor="@android:color/transparent"
+        android:pathData="M8.5,14.5 C10,13.8 14,13.8 15.5,14.5" />
+
+</vector>

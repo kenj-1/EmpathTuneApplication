@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    shape_btn_social.xml
+    Used for the Google and Spotify login buttons.
+
+    Figma spec:
+      - Smaller pill buttons: w=137dp, h=29dp in the 402dp frame → ~120dp, ~27dp on 360dp screen
+      - fill: #FBFB64 (same yellow as Sign In)
+      - stroke: #BCBC19
+      - cornerRadius: 40dp (pill)
+      - Drop shadow: 4dp y-offset — replicate with elevation on the parent LinearLayout
+        (set android:elevation="3dp" on the LinearLayout in the layout file)
+-->
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:state_pressed="true">
+        <shape android:shape="rectangle">
+            <corners android:radius="40dp" />
+            <solid android:color="#D4D400" />
+            <stroke android:width="1dp" android:color="#BCBC19" />
+        </shape>
+    </item>
+
+    <item>
+        <shape android:shape="rectangle">
+            <corners android:radius="40dp" />
+            <solid android:color="#FBFB64" />
+            <stroke android:width="1dp" android:color="#BCBC19" />
+        </shape>
+    </item>
+
+</selector>
