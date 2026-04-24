@@ -1,10 +1,10 @@
 package com.example.practice.newactivity.screens.login
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
-import androidx.appcompat.app.AppCompatActivity
 import com.example.practice.newactivity.R
 import com.example.practice.newactivity.app.CustomApp
 import com.example.practice.newactivity.screens.dashboard.DashboardActivity
@@ -12,7 +12,7 @@ import com.example.practice.newactivity.screens.register.RegisterActivity
 import com.example.practice.newactivity.utils.getEditTextValue
 import com.example.practice.newactivity.utils.toast
 
-class LoginActivity : AppCompatActivity(), LoginContract.View {
+class LoginActivity : Activity(), LoginContract.View {
 
     private lateinit var presenter: LoginPresenter
 
