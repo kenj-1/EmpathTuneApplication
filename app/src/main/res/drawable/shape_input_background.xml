@@ -1,5 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:top="3dp"><shape android:shape="rectangle"><solid android:color="@color/shadow_color"/><corners android:radius="20dp"/></shape></item>
-    <item android:bottom="2dp"><shape android:shape="rectangle"><solid android:color="@color/input_bg"/><corners android:radius="20dp"/></shape></item>
-</layer-list>
+<!--
+    shape_input_background.xml  —  CORRECTED
+    Figma: Rectangle_8 (Prompt_Box)
+    fill: #D9D9D9 — solid mid-gray
+    cornerRadius: 20dp
+    The inner shadow effect is approximated by a slightly darker border.
+-->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <corners android:radius="16dp" />
+    <solid android:color="#D9D9D9" />
+    <stroke android:width="1dp" android:color="#AAAAAA" />
+</shape>

@@ -25,7 +25,7 @@ class DashboardActivity : Activity(), DashboardContract.View {
             presenter.onProfileClicked()
         }
 
-        findViewById<TextView>(R.id.tv_logout).setOnClickListener {
+        findViewById<ImageView>(R.id.tv_logout).setOnClickListener {
             presenter.onLogoutClicked()
         }
     }

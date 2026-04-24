@@ -1,8 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-    Dashboard Page — LinearLayout root
-    Keeps: R.id.iv_nav_icon (ImageView), R.id.tv_logout (TextView)
-    unchanged from DashboardActivity.kt
+    activity_dashboard.xml  —  Full Figma Sync Pass
+    Target  : Small Phone API 36 (360 × 640 dp)
+    Root    : LinearLayout  (vertical, full-screen)
+    Allowed : LinearLayout · RelativeLayout · CardView (structural only)
+    ───────────────────────────────────────────────────────────────────
+    ALL IDs PRESERVED (DashboardActivity / DashboardPresenter bindings):
+      tv_greeting · et_feelings · fl_auto_player · iv_play_button
+      chip_happy · chip_love · chip_sad
+      card_gym_mood · iv_gym_art · iv_play_gym
+      card_study_mood · iv_study_art · iv_play_study
+      ll_song_player · tv_song_title · iv_album_art
+      ll_controls · seekbar_progress · seekbar_volume
+      iv_shuffle · iv_skip_back · iv_play_pause · iv_skip_forward · iv_repeat
+      fl_bottom_nav · tv_logout · iv_home · iv_nav_icon
 -->
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
@@ -12,14 +23,17 @@
     android:orientation="vertical"
     android:background="#FFFFFF">
 
-    <!-- ═══════════════════════════════════════════════
-         SCROLLABLE BODY (weight=1 pushes nav to bottom)
-         ═══════════════════════════════════════════════ -->
+    <!-- ═══════════════════════════════════════════════════════════
+         SCROLLABLE BODY
+         layout_weight="1" ensures the bottom nav is always anchored
+         at the very bottom regardless of content height.
+         ═══════════════════════════════════════════════════════════ -->
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
         android:scrollbars="none"
+        android:overScrollMode="never"
         android:fillViewport="true">
 
         <LinearLayout
@@ -27,76 +41,86 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <!-- ───────────────────────────────────────
-                 HEADER — decorative circles + greeting
-                 RelativeLayout needed for circle overlap
-                 ─────────────────────────────────────── -->
+            <!-- ─────────────────────────────────────────────────────
+                 HEADER  —  white section
+                 RelativeLayout is the minimum wrapper needed here to
+                 allow the two large yellow circles to overlap the
+                 greeting and input box.  clipChildren + clipToPadding
+                 are disabled so circles bleed off-screen naturally.
+                 ───────────────────────────────────────────────────── -->
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="#FFFFFF"
                 android:clipChildren="false"
                 android:clipToPadding="false"
-                android:background="#FFFFFF">
+                android:minHeight="220dp">
 
-                <!-- Top-right large yellow circle (Figma: Ellipse_11, x=177, y=-153, 244dp) -->
+                <!-- ── Decorative circle: top-RIGHT (Figma Ellipse_11)
+                     x=177, y=-153, 244dp diameter
+                     Sits at end/top, pushed right and up off-screen  -->
                 <View
-                    android:layout_width="244dp"
-                    android:layout_height="244dp"
-                    android:background="@drawable/shape_circle_yellow"
-                    android:layout_alignParentTop="true"
+                    android:layout_width="230dp"
+                    android:layout_height="230dp"
                     android:layout_alignParentEnd="true"
-                    android:translationX="60dp"
-                    android:translationY="-110dp" />
-
-                <!-- Top-left medium yellow circle (Figma: Ellipse_12, x=-84, y=-232, 244dp) -->
-                <View
-                    android:layout_width="244dp"
-                    android:layout_height="244dp"
-                    android:background="@drawable/shape_circle_yellow"
                     android:layout_alignParentTop="true"
-                    android:layout_alignParentStart="true"
-                    android:translationX="-75dp"
-                    android:translationY="-165dp" />
+                    android:translationX="62dp"
+                    android:translationY="-105dp"
+                    android:background="@drawable/shape_circle_yellow" />
 
-                <!-- "How are we feeling today, user?" -->
-                <!-- Figma: fontSize=19, centered, y=57 -->
+                <!-- ── Decorative circle: top-LEFT (Figma Ellipse_12)
+                     x=-84, y=-232, 244dp diameter
+                     Sits at start/top, pushed left and up off-screen  -->
+                <View
+                    android:layout_width="230dp"
+                    android:layout_height="230dp"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:translationX="-72dp"
+                    android:translationY="-160dp"
+                    android:background="@drawable/shape_circle_yellow" />
+
+                <!-- ── Greeting text (Figma: 19sp, light, centered, y≈57)
+                     Presenter calls showGreeting() which updates this at
+                     runtime — the static text is just a render placeholder -->
                 <TextView
                     android:id="@+id/tv_greeting"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
-                    android:layout_marginTop="42dp"
-                    android:text="How are we feeling\ntoday, user?"
-                    android:textSize="18sp"
-                    android:textColor="#000000"
+                    android:layout_marginTop="44dp"
                     android:fontFamily="sans-serif-light"
                     android:gravity="center"
-                    android:letterSpacing="0.05" />
+                    android:letterSpacing="0.05"
+                    android:text="How are we feeling\ntoday, user?"
+                    android:textColor="#000000"
+                    android:textSize="19sp" />
 
-                <!-- Prompt input box (Figma: inner shadow, #D9D9D9 fill, y=167) -->
+                <!-- ── Feelings prompt input (Figma: #D9D9D9, inner shadow,
+                     cornerRadius 20dp, y≈167, h≈72dp)                    -->
                 <EditText
                     android:id="@+id/et_feelings"
                     android:layout_width="match_parent"
                     android:layout_height="72dp"
                     android:layout_below="@id/tv_greeting"
-                    android:layout_marginTop="14dp"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginEnd="20dp"
-                    android:layout_marginBottom="14dp"
+                    android:layout_marginTop="18dp"
+                    android:layout_marginStart="18dp"
+                    android:layout_marginEnd="18dp"
+                    android:layout_marginBottom="18dp"
                     android:background="@drawable/shape_input_background"
-                    android:hint="Type what you feel here..."
-                    android:textColorHint="#80000000"
-                    android:textColor="#000000"
-                    android:textSize="8sp"
                     android:fontFamily="sans-serif-light"
+                    android:gravity="top|start"
+                    android:hint="Type what you feel here..."
+                    android:inputType="textMultiLine"
+                    android:maxLines="3"
                     android:paddingStart="14dp"
                     android:paddingEnd="14dp"
                     android:paddingTop="10dp"
-                    android:gravity="top|start"
-                    android:inputType="textMultiLine"
-                    android:maxLines="3" />
+                    android:textColor="#000000"
+                    android:textColorHint="#80000000"
+                    android:textSize="8sp" />
 
-                <!-- Invisible bottom anchor so RelativeLayout has correct height -->
+                <!-- Anchor — ensures RelativeLayout wraps to below the input -->
                 <View
                     android:id="@+id/header_bottom_anchor"
                     android:layout_width="match_parent"
@@ -105,256 +129,290 @@
 
             </RelativeLayout>
 
-            <!-- ───────────────────────────────────────
+            <!-- ─────────────────────────────────────────────────────
                  GRADIENT CONTENT AREA
-                 Figma: shape_gradient_board yellow→gray
-                 ─────────────────────────────────────── -->
+                 Figma: gradientStops #EDDA0A → #BBBBBB (top → bottom)
+                 shape_gradient_board uses angle=270 which is top→bottom
+                 in Android (startColor=yellow at top, endColor=gray at bottom)
+                 ───────────────────────────────────────────────────── -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:background="@drawable/shape_gradient_board"
-                android:paddingTop="6dp"
-                android:paddingBottom="16dp">
+                android:paddingTop="10dp"
+                android:paddingBottom="18dp">
 
-                <!-- AutoPlayer circle (Figma: Ellipse_9 + PlayButton, y=270) -->
+                <!-- ── AutoPlayer: yellow outer circle + white inner + play icon
+                     Figma: Ellipse_9 (68dp yellow), Ellipse_10 (68dp white)  -->
                 <FrameLayout
                     android:id="@+id/fl_auto_player"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
+                    android:layout_width="56dp"
+                    android:layout_height="56dp"
                     android:layout_gravity="center_horizontal"
-                    android:layout_marginBottom="10dp">
+                    android:layout_marginBottom="8dp">
 
+                    <!-- Outer yellow circle -->
                     <View
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_width="56dp"
+                        android:layout_height="56dp"
                         android:background="@drawable/shape_circle_yellow_outer" />
 
+                    <!-- Inner white circle + play icon -->
                     <ImageView
                         android:id="@+id/iv_play_button"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
+                        android:layout_width="44dp"
+                        android:layout_height="44dp"
                         android:layout_gravity="center"
                         android:background="@drawable/shape_circle_white"
-                        android:src="@drawable/ic_play"
-                        android:scaleType="center"
-                        android:padding="8dp"
-                        android:contentDescription="Auto play" />
+                        android:contentDescription="Auto play"
+                        android:padding="10dp"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/ic_play" />
+
                 </FrameLayout>
 
-                <!-- "How do you want to listen, user?" (Figma: y=344, 10sp) -->
+                <!-- ── Separator line (Figma: Line_1 - thin gray horizontal) -->
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:layout_marginStart="14dp"
+                    android:layout_marginEnd="14dp"
+                    android:layout_marginBottom="6dp"
+                    android:background="#80808080" />
+
+                <!-- ── "How do you want to listen, user? We are open ears....."
+                     Figma: 10sp, centered, y≈344                             -->
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="How do you want to listen, user? We are open ears....."
-                    android:textSize="8sp"
-                    android:textColor="#000000"
                     android:fontFamily="sans-serif-light"
                     android:gravity="center"
                     android:paddingStart="14dp"
                     android:paddingEnd="14dp"
-                    android:layout_marginBottom="7dp" />
+                    android:layout_marginBottom="6dp"
+                    android:text="How do you want to listen, user? We are open ears....."
+                    android:textColor="#000000"
+                    android:textSize="8sp" />
 
-                <!-- "Are we feeling......." (Figma: y=384, 10sp, left-aligned) -->
+                <!-- ── "Are we feeling......." (Figma: 10sp, left-aligned, y≈384) -->
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Are we feeling......."
-                    android:textSize="8sp"
-                    android:textColor="#000000"
                     android:fontFamily="sans-serif-light"
                     android:paddingStart="14dp"
-                    android:layout_marginBottom="7dp" />
+                    android:layout_marginBottom="6dp"
+                    android:text="Are we feeling......."
+                    android:textColor="#000000"
+                    android:textSize="8sp" />
 
-                <!-- ── Mood chips: Happy | Love | Sad (Figma: y=417) ── -->
+                <!-- ── Mood chips: Happy | Love | Sad
+                     Figma: y≈417, h≈36dp yellow pills with emoji icons
+                     Each chip has equal width via layout_weight="1"          -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     android:paddingStart="12dp"
                     android:paddingEnd="12dp"
-                    android:layout_marginBottom="7dp">
+                    android:layout_marginBottom="6dp">
 
                     <!-- Happy chip -->
                     <LinearLayout
                         android:id="@+id/chip_happy"
                         android:layout_width="0dp"
-                        android:layout_height="28dp"
+                        android:layout_height="32dp"
                         android:layout_weight="1"
                         android:orientation="horizontal"
                         android:background="@drawable/shape_btn_yellow"
                         android:gravity="center"
-                        android:layout_marginEnd="4dp"
+                        android:layout_marginEnd="5dp"
                         android:clickable="true"
                         android:focusable="true"
-                        android:elevation="2dp">
+                        android:elevation="3dp">
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:fontFamily="sans-serif-light"
                             android:text="Happy"
-                            android:textSize="8sp"
                             android:textColor="#000000"
-                            android:fontFamily="sans-serif-light" />
+                            android:textSize="8sp" />
+
                         <ImageView
-                            android:layout_width="16dp"
-                            android:layout_height="16dp"
-                            android:src="@drawable/happy"
+                            android:layout_width="18dp"
+                            android:layout_height="18dp"
                             android:layout_marginStart="4dp"
-                            android:contentDescription="Happy" />
+                            android:contentDescription="Happy"
+                            android:src="@drawable/happy" />
+
                     </LinearLayout>
 
                     <!-- Love chip -->
                     <LinearLayout
                         android:id="@+id/chip_love"
                         android:layout_width="0dp"
-                        android:layout_height="28dp"
+                        android:layout_height="32dp"
                         android:layout_weight="1"
                         android:orientation="horizontal"
                         android:background="@drawable/shape_btn_yellow"
                         android:gravity="center"
-                        android:layout_marginStart="4dp"
-                        android:layout_marginEnd="4dp"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginEnd="5dp"
                         android:clickable="true"
                         android:focusable="true"
-                        android:elevation="2dp">
+                        android:elevation="3dp">
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:fontFamily="sans-serif-light"
                             android:text="Love"
-                            android:textSize="8sp"
                             android:textColor="#000000"
-                            android:fontFamily="sans-serif-light" />
+                            android:textSize="8sp" />
+
                         <ImageView
-                            android:layout_width="16dp"
-                            android:layout_height="16dp"
-                            android:src="@drawable/heart"
+                            android:layout_width="18dp"
+                            android:layout_height="18dp"
                             android:layout_marginStart="4dp"
-                            android:contentDescription="Love" />
+                            android:contentDescription="Love"
+                            android:src="@drawable/heart" />
+
                     </LinearLayout>
 
                     <!-- Sad chip -->
                     <LinearLayout
                         android:id="@+id/chip_sad"
                         android:layout_width="0dp"
-                        android:layout_height="28dp"
+                        android:layout_height="32dp"
                         android:layout_weight="1"
                         android:orientation="horizontal"
                         android:background="@drawable/shape_btn_yellow"
                         android:gravity="center"
-                        android:layout_marginStart="4dp"
+                        android:layout_marginStart="5dp"
                         android:clickable="true"
                         android:focusable="true"
-                        android:elevation="2dp">
+                        android:elevation="3dp">
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:fontFamily="sans-serif-light"
                             android:text="Sad"
-                            android:textSize="8sp"
                             android:textColor="#000000"
-                            android:fontFamily="sans-serif-light" />
+                            android:textSize="8sp" />
+
                         <ImageView
-                            android:layout_width="16dp"
-                            android:layout_height="16dp"
-                            android:src="@drawable/sad"
+                            android:layout_width="18dp"
+                            android:layout_height="18dp"
                             android:layout_marginStart="4dp"
-                            android:contentDescription="Sad" />
+                            android:contentDescription="Sad"
+                            android:src="@drawable/sad" />
+
                     </LinearLayout>
 
                 </LinearLayout>
 
-                <!-- "What mood are we feeling today?" (Figma: y=467, 10sp) -->
+                <!-- ── "What mood are we feeling today?" (Figma: 10sp, left, y≈467) -->
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="What mood are we feeling today?"
-                    android:textSize="8sp"
-                    android:textColor="#000000"
                     android:fontFamily="sans-serif-light"
                     android:paddingStart="14dp"
-                    android:layout_marginBottom="7dp" />
+                    android:layout_marginBottom="8dp"
+                    android:text="What mood are we feeling today?"
+                    android:textColor="#000000"
+                    android:textSize="8sp" />
 
-                <!-- ── Playlist cards: Gym Mood + Study Mood (Figma: y=490, h=122) ── -->
+                <!-- ── Playlist cards: Gym Mood | Study Mood
+                     Figma: y≈490, h≈122dp, cornerRadius 30dp, gradient bg  -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     android:paddingStart="14dp"
                     android:paddingEnd="14dp"
-                    android:layout_marginBottom="10dp">
+                    android:layout_marginBottom="12dp">
 
                     <!-- Gym Mood card -->
                     <androidx.cardview.widget.CardView
                         android:id="@+id/card_gym_mood"
                         android:layout_width="0dp"
-                        android:layout_height="96dp"
+                        android:layout_height="100dp"
                         android:layout_weight="1"
-                        android:layout_marginEnd="6dp"
-                        app:cardCornerRadius="18dp"
-                        app:cardElevation="4dp"
+                        android:layout_marginEnd="7dp"
+                        app:cardCornerRadius="20dp"
+                        app:cardElevation="5dp"
                         app:cardBackgroundColor="#EDDA0A">
 
-                        <FrameLayout
+                        <RelativeLayout
                             android:layout_width="match_parent"
                             android:layout_height="match_parent">
 
+                            <!-- Album art fills card -->
                             <ImageView
                                 android:id="@+id/iv_gym_art"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:src="@drawable/ic_album_placeholder"
+                                android:contentDescription="Gym Mood album art"
                                 android:scaleType="centerCrop"
-                                android:contentDescription="Gym Mood album art" />
+                                android:src="@drawable/ic_album_placeholder" />
 
-                            <!-- Figma: Gym Mood label, 7sp, center-top -->
+                            <!-- "Gym Mood" label — top-center -->
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Gym Mood"
-                                android:textSize="6sp"
-                                android:textColor="#000000"
+                                android:layout_centerHorizontal="true"
+                                android:layout_marginTop="7dp"
                                 android:fontFamily="sans-serif-light"
-                                android:layout_gravity="top|center_horizontal"
-                                android:layout_marginTop="6dp" />
+                                android:text="Gym Mood"
+                                android:textColor="#000000"
+                                android:textSize="7sp" />
 
-                            <!-- Figma: play circle, bottom-right -->
+                            <!-- Play circle — bottom-right -->
                             <FrameLayout
                                 android:id="@+id/iv_play_gym"
-                                android:layout_width="28dp"
-                                android:layout_height="28dp"
-                                android:layout_gravity="bottom|end"
-                                android:layout_margin="6dp"
+                                android:layout_width="30dp"
+                                android:layout_height="30dp"
+                                android:layout_alignParentBottom="true"
+                                android:layout_alignParentEnd="true"
+                                android:layout_margin="7dp"
                                 android:clickable="true"
                                 android:focusable="true">
+
                                 <View
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
                                     android:background="@drawable/shape_circle_yellow_outer" />
+
                                 <ImageView
-                                    android:layout_width="20dp"
-                                    android:layout_height="20dp"
+                                    android:layout_width="22dp"
+                                    android:layout_height="22dp"
                                     android:layout_gravity="center"
-                                    android:src="@drawable/ic_play"
                                     android:background="@drawable/shape_circle_white"
-                                    android:padding="4dp"
+                                    android:contentDescription="Play gym mood"
+                                    android:padding="5dp"
                                     android:scaleType="fitCenter"
-                                    android:contentDescription="Play gym mood" />
+                                    android:src="@drawable/ic_play" />
+
                             </FrameLayout>
 
-                        </FrameLayout>
+                        </RelativeLayout>
+
                     </androidx.cardview.widget.CardView>
 
                     <!-- Study Mood card -->
                     <androidx.cardview.widget.CardView
                         android:id="@+id/card_study_mood"
                         android:layout_width="0dp"
-                        android:layout_height="96dp"
+                        android:layout_height="100dp"
                         android:layout_weight="1"
-                        android:layout_marginStart="6dp"
-                        app:cardCornerRadius="18dp"
-                        app:cardElevation="4dp"
+                        android:layout_marginStart="7dp"
+                        app:cardCornerRadius="20dp"
+                        app:cardElevation="5dp"
                         app:cardBackgroundColor="#EDDA0A">
 
-                        <FrameLayout
+                        <RelativeLayout
                             android:layout_width="match_parent"
                             android:layout_height="match_parent">
 
@@ -362,165 +420,176 @@
                                 android:id="@+id/iv_study_art"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:src="@drawable/ic_album_placeholder"
+                                android:contentDescription="Study Mood album art"
                                 android:scaleType="centerCrop"
-                                android:contentDescription="Study Mood album art" />
+                                android:src="@drawable/ic_album_placeholder" />
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Study Mood"
-                                android:textSize="6sp"
-                                android:textColor="#000000"
+                                android:layout_centerHorizontal="true"
+                                android:layout_marginTop="7dp"
                                 android:fontFamily="sans-serif-light"
-                                android:layout_gravity="top|center_horizontal"
-                                android:layout_marginTop="6dp" />
+                                android:text="Study Mood"
+                                android:textColor="#000000"
+                                android:textSize="7sp" />
 
                             <FrameLayout
                                 android:id="@+id/iv_play_study"
-                                android:layout_width="28dp"
-                                android:layout_height="28dp"
-                                android:layout_gravity="bottom|end"
-                                android:layout_margin="6dp"
+                                android:layout_width="30dp"
+                                android:layout_height="30dp"
+                                android:layout_alignParentBottom="true"
+                                android:layout_alignParentEnd="true"
+                                android:layout_margin="7dp"
                                 android:clickable="true"
                                 android:focusable="true">
+
                                 <View
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
                                     android:background="@drawable/shape_circle_yellow_outer" />
+
                                 <ImageView
-                                    android:layout_width="20dp"
-                                    android:layout_height="20dp"
+                                    android:layout_width="22dp"
+                                    android:layout_height="22dp"
                                     android:layout_gravity="center"
-                                    android:src="@drawable/ic_play"
                                     android:background="@drawable/shape_circle_white"
-                                    android:padding="4dp"
+                                    android:contentDescription="Play study mood"
+                                    android:padding="5dp"
                                     android:scaleType="fitCenter"
-                                    android:contentDescription="Play study mood" />
+                                    android:src="@drawable/ic_play" />
+
                             </FrameLayout>
 
-                        </FrameLayout>
+                        </RelativeLayout>
+
                     </androidx.cardview.widget.CardView>
 
                 </LinearLayout>
 
-                <!-- ── Song Player card (Figma: SongPlayer, y=638, h=107) ── -->
+                <!-- ── Song Player Card
+                     Figma: SongPlayer y≈638, h≈107dp, #BBBBBB fill, 30dp radius
+                     ID: ll_song_player — preserved for DashboardActivity binding -->
                 <androidx.cardview.widget.CardView
                     android:id="@+id/ll_song_player"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginEnd="10dp"
-                    app:cardCornerRadius="20dp"
-                    app:cardElevation="4dp"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginEnd="12dp"
+                    app:cardCornerRadius="22dp"
+                    app:cardElevation="5dp"
                     app:cardBackgroundColor="#BBBBBB">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
-                        android:paddingStart="12dp"
-                        android:paddingEnd="12dp"
-                        android:paddingTop="8dp"
-                        android:paddingBottom="8dp">
+                        android:paddingStart="14dp"
+                        android:paddingEnd="14dp"
+                        android:paddingTop="10dp"
+                        android:paddingBottom="10dp">
 
-                        <!-- "You're in love...." pill tag (Figma: y=626, yellow) -->
+                        <!-- "You're in love...." — yellow pill tag, centered -->
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="You're in love...."
-                            android:textSize="6sp"
-                            android:textColor="#000000"
-                            android:fontFamily="sans-serif-light"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_marginBottom="8dp"
                             android:background="@drawable/shape_btn_yellow"
-                            android:paddingStart="10dp"
-                            android:paddingEnd="10dp"
+                            android:fontFamily="sans-serif-light"
+                            android:paddingStart="12dp"
+                            android:paddingEnd="12dp"
                             android:paddingTop="3dp"
                             android:paddingBottom="3dp"
-                            android:layout_gravity="center_horizontal"
-                            android:layout_marginBottom="8dp" />
+                            android:text="You're in love...."
+                            android:textColor="#000000"
+                            android:textSize="6sp" />
 
-                        <!-- Song info row: left details + right album art -->
+                        <!-- Song detail row: left (info+controls) | right (album art) -->
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:orientation="horizontal"
                             android:gravity="center_vertical">
 
-                            <!-- Left: title, artist, album, seekbar, controls -->
+                            <!-- LEFT COLUMN — song info, seekbar, controls, volume -->
                             <LinearLayout
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:orientation="vertical">
 
-                                <!-- Song title (Figma: "Naiilang", 8sp bold) -->
+                                <!-- Song title (Figma: "Naiilang", 8sp, bold) -->
                                 <TextView
                                     android:id="@+id/tv_song_title"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:letterSpacing="0.10"
                                     android:text="Naiilang"
-                                    android:textSize="8sp"
-                                    android:textStyle="bold"
                                     android:textColor="#000000"
-                                    android:letterSpacing="0.10" />
+                                    android:textSize="8sp"
+                                    android:textStyle="bold" />
 
-                                <!-- Artist (Figma: "Le John", 6sp, 35% opacity) -->
+                                <!-- Artist name (Figma: "Le John", 6sp, 35% opacity) -->
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="Le John"
-                                    android:textSize="6sp"
-                                    android:textColor="#59000000"
                                     android:fontFamily="sans-serif-light"
-                                    android:letterSpacing="0.10" />
+                                    android:letterSpacing="0.10"
+                                    android:text="Le John"
+                                    android:textColor="#59000000"
+                                    android:textSize="6sp" />
 
                                 <!-- Album name (Figma: "Naiilang", 6sp, 35% opacity) -->
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="Naiilang"
-                                    android:textSize="6sp"
-                                    android:textColor="#59000000"
+                                    android:layout_marginBottom="6dp"
                                     android:fontFamily="sans-serif-light"
                                     android:letterSpacing="0.10"
-                                    android:layout_marginBottom="5dp" />
+                                    android:text="Naiilang"
+                                    android:textColor="#59000000"
+                                    android:textSize="6sp" />
 
-                                <!-- Progress seekbar (Figma: Rectangle_8 white progress) -->
+                                <!-- Progress seekbar (Figma: Rectangle_8, white, 84% filled) -->
                                 <SeekBar
                                     android:id="@+id/seekbar_progress"
                                     android:layout_width="match_parent"
-                                    android:layout_height="8dp"
-                                    android:progressDrawable="@drawable/shape_seekbar_track"
-                                    android:thumb="@null"
+                                    android:layout_height="6dp"
                                     android:max="100"
-                                    android:progress="84" />
+                                    android:progress="84"
+                                    android:progressDrawable="@drawable/shape_seekbar_track"
+                                    android:thumb="@null" />
 
-                                <!-- Time row: 0:00 ... 4:07 -->
+                                <!-- Time indicators: 0:00 .............. 4:07 -->
                                 <LinearLayout
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:orientation="horizontal"
                                     android:layout_marginTop="2dp"
-                                    android:layout_marginBottom="4dp">
+                                    android:layout_marginBottom="5dp">
+
                                     <TextView
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
+                                        android:fontFamily="sans-serif-light"
                                         android:text="0:00"
-                                        android:textSize="5sp"
                                         android:textColor="#59000000"
-                                        android:fontFamily="sans-serif-light" />
+                                        android:textSize="5sp" />
+
                                     <View
                                         android:layout_width="0dp"
                                         android:layout_height="1dp"
                                         android:layout_weight="1" />
+
                                     <TextView
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
+                                        android:fontFamily="sans-serif-light"
                                         android:text="4:07"
-                                        android:textSize="5sp"
                                         android:textColor="#59000000"
-                                        android:fontFamily="sans-serif-light" />
+                                        android:textSize="5sp" />
+
                                 </LinearLayout>
 
                                 <!-- Playback controls (Figma: shuffle|prev|play|next|repeat) -->
@@ -528,183 +597,194 @@
                                     android:id="@+id/ll_controls"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:orientation="horizontal"
-                                    android:gravity="center_vertical">
+                                    android:layout_marginBottom="5dp"
+                                    android:gravity="center_vertical"
+                                    android:orientation="horizontal">
 
                                     <ImageView
                                         android:id="@+id/iv_shuffle"
-                                        android:layout_width="12dp"
-                                        android:layout_height="12dp"
-                                        android:src="@drawable/shuffle"
+                                        android:layout_width="13dp"
+                                        android:layout_height="13dp"
+                                        android:contentDescription="Shuffle"
                                         android:scaleType="fitCenter"
-                                        android:contentDescription="Shuffle" />
+                                        android:src="@drawable/shuffle" />
 
                                     <ImageView
                                         android:id="@+id/iv_skip_back"
-                                        android:layout_width="12dp"
-                                        android:layout_height="12dp"
-                                        android:src="@drawable/ic_skip_back"
+                                        android:layout_width="13dp"
+                                        android:layout_height="13dp"
+                                        android:layout_marginStart="9dp"
+                                        android:contentDescription="Previous"
                                         android:scaleType="fitCenter"
-                                        android:layout_marginStart="8dp"
-                                        android:contentDescription="Previous" />
+                                        android:src="@drawable/ic_skip_back" />
 
                                     <ImageView
                                         android:id="@+id/iv_play_pause"
-                                        android:layout_width="16dp"
-                                        android:layout_height="16dp"
-                                        android:src="@drawable/ic_play"
+                                        android:layout_width="18dp"
+                                        android:layout_height="18dp"
+                                        android:layout_marginStart="9dp"
+                                        android:contentDescription="Play / Pause"
                                         android:scaleType="fitCenter"
-                                        android:layout_marginStart="8dp"
-                                        android:contentDescription="Play / Pause" />
+                                        android:src="@drawable/ic_play" />
 
                                     <ImageView
                                         android:id="@+id/iv_skip_forward"
-                                        android:layout_width="12dp"
-                                        android:layout_height="12dp"
-                                        android:src="@drawable/ic_skip_forward"
+                                        android:layout_width="13dp"
+                                        android:layout_height="13dp"
+                                        android:layout_marginStart="9dp"
+                                        android:contentDescription="Next"
                                         android:scaleType="fitCenter"
-                                        android:layout_marginStart="8dp"
-                                        android:contentDescription="Next" />
+                                        android:src="@drawable/ic_skip_forward" />
 
                                     <ImageView
                                         android:id="@+id/iv_repeat"
-                                        android:layout_width="12dp"
-                                        android:layout_height="12dp"
-                                        android:src="@drawable/repeat"
+                                        android:layout_width="13dp"
+                                        android:layout_height="13dp"
+                                        android:layout_marginStart="9dp"
+                                        android:contentDescription="Repeat"
                                         android:scaleType="fitCenter"
-                                        android:layout_marginStart="8dp"
-                                        android:contentDescription="Repeat" />
+                                        android:src="@drawable/repeat" />
 
                                 </LinearLayout>
 
-                                <!-- Volume row -->
+                                <!-- Volume row: vol-low | seekbar | vol-high -->
                                 <LinearLayout
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:orientation="horizontal"
                                     android:gravity="center_vertical"
-                                    android:layout_marginTop="4dp">
+                                    android:orientation="horizontal">
 
                                     <ImageView
-                                        android:layout_width="8dp"
-                                        android:layout_height="8dp"
-                                        android:src="@drawable/volumelow"
+                                        android:layout_width="9dp"
+                                        android:layout_height="9dp"
+                                        android:contentDescription="Volume low"
                                         android:scaleType="fitCenter"
-                                        android:contentDescription="Volume low" />
+                                        android:src="@drawable/volumelow" />
 
                                     <SeekBar
                                         android:id="@+id/seekbar_volume"
                                         android:layout_width="0dp"
-                                        android:layout_height="8dp"
+                                        android:layout_height="6dp"
                                         android:layout_weight="1"
                                         android:layout_marginStart="4dp"
                                         android:layout_marginEnd="4dp"
-                                        android:progressDrawable="@drawable/shape_seekbar_track"
-                                        android:thumb="@null"
                                         android:max="100"
-                                        android:progress="60" />
+                                        android:progress="60"
+                                        android:progressDrawable="@drawable/shape_seekbar_track"
+                                        android:thumb="@null" />
 
                                     <ImageView
-                                        android:layout_width="8dp"
-                                        android:layout_height="8dp"
-                                        android:src="@drawable/volumehigh"
+                                        android:layout_width="9dp"
+                                        android:layout_height="9dp"
+                                        android:contentDescription="Volume high"
                                         android:scaleType="fitCenter"
-                                        android:contentDescription="Volume high" />
+                                        android:src="@drawable/volumehigh" />
 
                                 </LinearLayout>
 
                             </LinearLayout>
 
-                            <!-- Right: album art (Figma: image_22, 82×82dp) -->
+                            <!-- RIGHT COLUMN — album art (Figma: image_22, ~70×70dp) -->
                             <ImageView
                                 android:id="@+id/iv_album_art"
-                                android:layout_width="66dp"
-                                android:layout_height="66dp"
-                                android:layout_marginStart="10dp"
-                                android:src="@drawable/ic_album_placeholder"
+                                android:layout_width="70dp"
+                                android:layout_height="70dp"
+                                android:layout_marginStart="12dp"
+                                android:contentDescription="Album art"
                                 android:scaleType="centerCrop"
-                                android:contentDescription="Album art" />
+                                android:src="@drawable/ic_album_placeholder" />
 
                         </LinearLayout>
 
                     </LinearLayout>
+
                 </androidx.cardview.widget.CardView>
 
             </LinearLayout>
-            <!-- end gradient content area -->
+            <!-- end gradient content LinearLayout -->
 
         </LinearLayout>
+        <!-- end scroll child LinearLayout -->
+
     </ScrollView>
+    <!-- end ScrollView -->
 
-    <!-- ═══════════════════════════════════════════════
-         BOTTOM NAVIGATION BAR
-         Figma: HomeNavigation — yellow bar, 3 icons,
-         center home icon sits on a raised white circle.
+    <!-- ═══════════════════════════════════════════════════════════
+         BOTTOM NAVIGATION BAR  —  always anchored at screen bottom
+         Figma: HomeNavigation — #E9EE67 background, 3 slots,
+         center slot has a raised #F0F0F0 white circle (Ellipse_18).
 
-         IDs preserved from DashboardActivity.kt:
-           tv_logout   → TextView (left nav tap → logout)
-           iv_nav_icon → ImageView (right nav tap → Profile)
-         ═══════════════════════════════════════════════ -->
+         IDs from DashboardActivity.kt — MUST NOT CHANGE:
+           tv_logout   → left slot (click = logout via Presenter)
+           iv_nav_icon → right slot (click = navigate to Profile)
+         ═══════════════════════════════════════════════════════════ -->
     <LinearLayout
         android:id="@+id/fl_bottom_nav"
         android:layout_width="match_parent"
-        android:layout_height="56dp"
+        android:layout_height="58dp"
         android:orientation="horizontal"
         android:background="@drawable/shape_bottom_nav"
         android:gravity="center_vertical">
 
-        <!-- Left nav item — tv_logout kept as TextView; drawableTop renders the icon -->
-        <TextView
+        <!-- LEFT SLOT: create icon
+             tv_logout ID preserved — DashboardActivity binds logout here.
+             drawableTop makes it look like an icon button despite being TextView -->
+        <ImageView
             android:id="@+id/tv_logout"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:gravity="center"
-            android:text=""
-            android:drawableTop="@drawable/ic_nav_create"
-            android:drawablePadding="0dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
             android:clickable="true"
             android:focusable="true"
-            android:background="?attr/selectableItemBackgroundBorderless" />
+            android:padding="15dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_nav_create"
+            android:contentDescription="Logout" />
 
-        <!-- Center nav item — Home icon on raised white circle (Figma: Ellipse_18) -->
-        <FrameLayout
+        <!-- CENTER SLOT: Home icon on raised white circle -->
+        <RelativeLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1">
 
-            <!-- White circle behind home icon (Figma: Ellipse_18, 63dp, glowing shadow) -->
+            <!-- Raised white circle (Figma: Ellipse_18, 63dp, yellow-glow shadow) -->
             <View
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:layout_gravity="center"
-                android:background="@drawable/shape_circle_white_nav" />
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_centerInParent="true"
+                android:background="@drawable/shape_circle_white_nav"
+                android:elevation="4dp" />
 
+            <!-- Home icon on top of the white circle -->
             <ImageView
                 android:id="@+id/iv_home"
                 android:layout_width="28dp"
                 android:layout_height="28dp"
-                android:layout_gravity="center"
-                android:src="@drawable/ic_home"
+                android:layout_centerInParent="true"
+                android:contentDescription="Home"
+                android:elevation="5dp"
                 android:scaleType="fitCenter"
-                android:contentDescription="Home" />
+                android:src="@drawable/ic_home" />
 
-        </FrameLayout>
+        </RelativeLayout>
 
-        <!-- Right nav item — Profile icon (ImageView, kept from DashboardActivity.kt) -->
+        <!-- RIGHT SLOT: Profile icon
+             iv_nav_icon preserved — DashboardActivity binds navigateToProfile() -->
         <ImageView
             android:id="@+id/iv_nav_icon"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:src="@drawable/username"
-            android:scaleType="center"
-            android:padding="14dp"
-            android:clickable="true"
-            android:focusable="true"
             android:background="?attr/selectableItemBackgroundBorderless"
-            android:contentDescription="Profile" />
+            android:clickable="true"
+            android:contentDescription="Profile"
+            android:focusable="true"
+            android:padding="15dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/username" />
 
     </LinearLayout>
+    <!-- end bottom nav -->
 
 </LinearLayout>

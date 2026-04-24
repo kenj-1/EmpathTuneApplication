@@ -1,303 +1,417 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-    Profile Page
-    Converted from FigML: frame id="13:5" name="Profile_Page"
-    Original size: 402 × 874 dp
+    activity_profile.xml
+    Target  : Small Phone API 36 — 360 × 640 dp
+    Root    : LinearLayout (vertical) per spec
+    ─────────────────────────────────────────────────────────────────
+    ALL IDs PRESERVED (ProfileActivity.kt binding):
+      iv_menu               → ImageView  (click = finish())
+    Display-only IDs kept for future presenter expansion:
+      iv_profile_photo · tv_username_display · tv_empathy_status
+      tv_label_username · et_username
+      tv_label_first_name · et_first_name
+      tv_label_middle_name · et_middle_name
+      tv_label_last_name · et_last_name
+      tv_label_email · et_email
+    ─────────────────────────────────────────────────────────────────
+    Visual notes (from Figma screenshot analysis):
+      • White header: profile photo (circle, ~90dp), name, status,
+        two small yellow circle buttons at top-right
+      • Yellow→gray gradient card: starts below header, fills
+        remaining height above the bottom nav, rounded 26dp corners
+      • 5 label + pill-input field pairs inside the card
+      • Bottom nav bar identical to Dashboard (create | home | profile)
 -->
-<FrameLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/profile_bg">
+    android:orientation="vertical"
+    android:background="#FFFFFF">
 
-    <!-- =============================================
-         LAYER 1: Background gradient board
-         Vector id="36:3" name="LogInBoard"
-         x=9, y=234, width=383, height=634, cornerRadius=30
-         Gradient: #bbbbbb → #edda0a → #edda0a → #bbbbbb
-         ============================================= -->
-    <View
-        android:id="@+id/view_profile_board"
-        android:layout_width="@dimen/profile_board_width"
-        android:layout_height="@dimen/profile_board_height"
-        android:layout_gravity="bottom|center_horizontal"
-        android:layout_marginBottom="100dp"
-        android:background="@drawable/shape_profile_board" />
-
-    <!-- =============================================
-         LAYER 2: Main vertical content (LinearLayout)
-         ============================================= -->
-    <LinearLayout
+    <!-- ═══════════════════════════════════════════════════════
+         HEADER — white section
+         RelativeLayout needed: photo + text column + two
+         top-right buttons need anchored/overlapping placement.
+         Height: ~132dp matches Figma header region (y=0–234).
+         ═══════════════════════════════════════════════════════ -->
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="132dp"
+        android:background="#FFFFFF"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp">
 
-        <!-- ── TOP HEADER ROW ──────────────────────
-             Contains: profile image (left), name + status
-             (center-right), menu icon (far right)
-             ──────────────────────────────────────── -->
-        <FrameLayout
-            android:id="@+id/fl_header"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/profile_header_height">
+        <!-- ── Profile photo (Figma: image_9, x=22, y=87, 123×123dp)
+             Circular dark background with white silhouette icon.
+             Vertically centered in the header, aligned to start.    -->
+        <ImageView
+            android:id="@+id/iv_profile_photo"
+            android:layout_width="88dp"
+            android:layout_height="88dp"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
 
-            <!-- Menu / hamburger icon (Group_19)
-                 x=335, y=17, size=47 → top-right -->
-            <ImageView
-                android:id="@+id/iv_menu"
-                android:layout_width="@dimen/menu_icon_size"
-                android:layout_height="@dimen/menu_icon_size"
-                android:layout_gravity="top|end"
-                android:layout_marginTop="@dimen/menu_margin_top"
-                android:layout_marginEnd="@dimen/menu_margin_end"
-                android:src="@drawable/ic_profile_menu"
-                android:background="@drawable/shape_menu_bg"
-                android:scaleType="center"
-                android:padding="@dimen/menu_icon_padding"
-                android:contentDescription="@string/cd_menu" />
+            android:contentDescription="Profile photo"
+            android:padding="14dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_profile_placeholder" />
+<!--
+android:background="@drawable/shape_profile_photo_bg"
+-->
+        <!-- ── Name + Empathy Status (Figma: "User" 32sp, "Empathy Status: Yearner" 12sp)
+             Vertically centered, positioned to the right of the photo. -->
+        <LinearLayout
+            android:id="@+id/ll_name_block"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="14dp"
+            android:layout_toEndOf="@id/iv_profile_photo"
+            android:orientation="vertical">
 
-            <!-- Profile image (image_9 id="36:5")
-                 x=27, y=97, width=123, height=123 -->
-            <ImageView
-                android:id="@+id/iv_profile_photo"
-                android:layout_width="@dimen/profile_photo_size"
-                android:layout_height="@dimen/profile_photo_size"
-                android:layout_gravity="bottom|start"
-                android:layout_marginStart="@dimen/profile_photo_margin_start"
-                android:layout_marginBottom="@dimen/profile_photo_margin_bottom"
-                android:src="@drawable/ic_profile_placeholder"
-                android:scaleType="centerCrop"
-                android:contentDescription="@string/cd_profile_photo" />
-
-            <!-- Name + Status column (right of photo)
-                 "User" (id="36:8") x=167, y=127, fontSize=32
-                 "Empathy Status: Yearner" (id="36:7") x=170, y=182, fontSize=12 -->
-            <LinearLayout
+            <TextView
+                android:id="@+id/tv_username_display"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_gravity="bottom|start"
-                android:layout_marginStart="@dimen/profile_name_margin_start"
-                android:layout_marginBottom="@dimen/profile_name_margin_bottom">
+                android:fontFamily="sans-serif-light"
+                android:letterSpacing="0.05"
+                android:text="User"
+                android:textColor="#000000"
+                android:textSize="28sp" />
 
-                <TextView
-                    android:id="@+id/tv_username_display"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/profile_username_display"
-                    android:textSize="@dimen/profile_name_text_size"
-                    android:textColor="@color/text_black"
-                    android:fontFamily="sans-serif-light"
-                    android:letterSpacing="0.2" />
+            <TextView
+                android:id="@+id/tv_empathy_status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-light"
+                android:letterSpacing="0.05"
+                android:text="Empathy Status: Yearner"
+                android:textColor="#000000"
+                android:textSize="11sp" />
 
-                <TextView
-                    android:id="@+id/tv_empathy_status"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/status_margin_top"
-                    android:text="@string/empathy_status"
-                    android:textSize="@dimen/status_text_size"
-                    android:textColor="@color/text_black"
-                    android:fontFamily="sans-serif-light"
-                    android:letterSpacing="0.2" />
-            </LinearLayout>
-        </FrameLayout>
+        </LinearLayout>
 
-        <!-- ── SCROLLABLE FORM SECTION ─────────────
-             Contains all 5 labelled input fields
-             wrapped in ScrollView so content is
-             accessible on smaller screens
-             ──────────────────────────────────────── -->
+        <!-- ── Logout button (Figma: Logout_Button, x=284, y=24, 34dp yellow circle)
+             No ID needed — purely decorative in this version.
+             Sits at top-right, slightly left of the menu button.    -->
+        <ImageView
+            android:layout_width="34dp"
+            android:layout_height="34dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginEnd="46dp"
+            android:layout_marginTop="14dp"
+
+            android:contentDescription="Back"
+            android:padding="8dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_nav_create" />
+<!--android:background="@drawable/shape_profile_btn_bg"-->
+        <!-- ── Menu button (Figma: Group_19, x=335, y=17, ~34dp yellow circle)
+             ID: iv_menu — ProfileActivity.kt calls finish() on click.  -->
+        <ImageView
+            android:id="@+id/iv_menu"
+            android:layout_width="34dp"
+            android:layout_height="34dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginEnd="6dp"
+            android:layout_marginTop="14dp"
+
+            android:clickable="true"
+            android:contentDescription="Menu"
+            android:focusable="true"
+            android:padding="8dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_profile_menu" />
+<!--android:background="@drawable/shape_profile_btn_bg"-->
+
+
+    </RelativeLayout>
+
+    <!-- ═══════════════════════════════════════════════════════
+         GRADIENT FORM CARD  (weight=1 fills remaining height)
+         Figma: LogInBoard — #FEFE53→#BBBBBB gradient, 30dp radius
+         The card fills the space between header and bottom nav.
+         ScrollView is nested so the card background is always
+         visible even when content is shorter than the screen.
+         ═══════════════════════════════════════════════════════ -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="6dp"
+
+        android:orientation="vertical">
+<!--android:background="@drawable/shape_profile_card"-->
         <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:fillViewport="true"
+            android:layout_height="match_parent"
+            android:overScrollMode="never"
             android:scrollbars="none">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:paddingBottom="@dimen/form_padding_bottom">
+                android:paddingTop="20dp"
+                android:paddingBottom="24dp"
+                android:paddingStart="20dp"
+                android:paddingEnd="20dp">
 
-                <!-- ── FIELD 1: Username ─────────────
-                     Label id="38:37" y=343, fontWeight=800
-                     Field id="38:12" y=360, text="User"
-                     ─────────────────────────────────── -->
+                <!-- ═══════════════════════════════════════════
+                     FIELD PATTERN (repeated 5 times):
+                       • Bold centered label (75% opacity)
+                       • Centered pill EditText
+                     Figma: label fontSize=12sp ExtraBold
+                            field h=34dp, cornerRadius=40dp
+                     ═══════════════════════════════════════════ -->
+
+                <!-- ── 1. USERNAME ─────────────────────────── -->
                 <TextView
                     android:id="@+id/tv_label_username"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="@dimen/field_label_margin_top_first"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="4dp"
                     android:alpha="0.75"
-                    android:letterSpacing="0.2"
-                    android:text="@string/label_username"
-                    android:textColor="@color/label_text"
-                    android:textSize="@dimen/field_label_text_size"
+                    android:fontFamily="sans-serif"
+                    android:letterSpacing="0.05"
+                    android:text="Username"
+                    android:textColor="#000000"
+                    android:textSize="11sp"
                     android:textStyle="bold" />
 
                 <EditText
                     android:id="@+id/et_username"
-                    android:layout_width="@dimen/field_width"
-                    android:layout_height="@dimen/field_height"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="@dimen/field_margin_top"
-                    android:background="@drawable/shape_field_bg"
+                    android:layout_width="match_parent"
+                    android:layout_height="38dp"
+                    android:layout_marginBottom="10dp"
+
                     android:fontFamily="sans-serif-light"
                     android:gravity="center"
                     android:inputType="text"
-                    android:letterSpacing="0.2"
-                    android:paddingStart="@dimen/field_padding_horizontal"
-                    android:paddingEnd="@dimen/field_padding_horizontal"
+                    android:letterSpacing="0.05"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp"
                     android:singleLine="true"
-                    android:text="@string/field_username_value"
-                    android:textColor="@color/text_black"
-                    android:textSize="@dimen/field_text_size" />
+                    android:text="User"
+                    android:textColor="#000000"
+                    android:textSize="11sp" />
+                <!--android:background="@drawable/shape_profile_field"-->
 
-                <!-- ── FIELD 2: First Name ────────────
-                     Label id="38:38" y=437, fontWeight=800
-                     Field id="38:20" y=454, text="John"
-                     ─────────────────────────────────── -->
+                <!-- ── 2. FIRST NAME ───────────────────────── -->
                 <TextView
                     android:id="@+id/tv_label_first_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="@dimen/field_label_margin_top"
+                    android:layout_marginBottom="4dp"
                     android:alpha="0.75"
-                    android:letterSpacing="0.2"
-                    android:text="@string/label_first_name"
-                    android:textColor="@color/label_text"
-                    android:textSize="@dimen/field_label_text_size"
+                    android:fontFamily="sans-serif"
+                    android:letterSpacing="0.05"
+                    android:text="First Name"
+                    android:textColor="#000000"
+                    android:textSize="11sp"
                     android:textStyle="bold" />
 
                 <EditText
                     android:id="@+id/et_first_name"
-                    android:layout_width="@dimen/field_width"
-                    android:layout_height="@dimen/field_height"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="@dimen/field_margin_top"
-                    android:background="@drawable/shape_field_bg"
+                    android:layout_width="match_parent"
+                    android:layout_height="38dp"
+                    android:layout_marginBottom="10dp"
+
                     android:fontFamily="sans-serif-light"
                     android:gravity="center"
                     android:inputType="textPersonName"
-                    android:letterSpacing="0.2"
-                    android:paddingStart="@dimen/field_padding_horizontal"
-                    android:paddingEnd="@dimen/field_padding_horizontal"
+                    android:letterSpacing="0.05"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp"
                     android:singleLine="true"
-                    android:text="@string/field_first_name_value"
-                    android:textColor="@color/text_black"
-                    android:textSize="@dimen/field_text_size" />
-
-                <!-- ── FIELD 3: Middle Name ───────────
-                     Label id="38:39" y=531, fontWeight=800
-                     Field id="38:25" y=548, text="Middle"
-                     ─────────────────────────────────── -->
+                    android:text="John"
+                    android:textColor="#000000"
+                    android:textSize="11sp" />
+<!--android:background="@drawable/shape_profile_field"-->
+                <!-- ── 3. MIDDLE NAME ──────────────────────── -->
                 <TextView
                     android:id="@+id/tv_label_middle_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="@dimen/field_label_margin_top"
+                    android:layout_marginBottom="4dp"
                     android:alpha="0.75"
-                    android:letterSpacing="0.2"
-                    android:text="@string/label_middle_name"
-                    android:textColor="@color/label_text"
-                    android:textSize="@dimen/field_label_text_size"
+                    android:fontFamily="sans-serif"
+                    android:letterSpacing="0.05"
+                    android:text="Middle Name"
+                    android:textColor="#000000"
+                    android:textSize="11sp"
                     android:textStyle="bold" />
 
                 <EditText
                     android:id="@+id/et_middle_name"
-                    android:layout_width="@dimen/field_width"
-                    android:layout_height="@dimen/field_height"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="@dimen/field_margin_top"
-                    android:background="@drawable/shape_field_bg"
+                    android:layout_width="match_parent"
+                    android:layout_height="38dp"
+                    android:layout_marginBottom="10dp"
+
                     android:fontFamily="sans-serif-light"
                     android:gravity="center"
                     android:inputType="textPersonName"
-                    android:letterSpacing="0.2"
-                    android:paddingStart="@dimen/field_padding_horizontal"
-                    android:paddingEnd="@dimen/field_padding_horizontal"
+                    android:letterSpacing="0.05"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp"
                     android:singleLine="true"
-                    android:text="@string/field_middle_name_value"
-                    android:textColor="@color/text_black"
-                    android:textSize="@dimen/field_text_size" />
-
-                <!-- ── FIELD 4: Last Name ─────────────
-                     Label id="38:40" y=625, fontWeight=800
-                     Field id="38:35" y=642, text="Doe"
-                     ─────────────────────────────────── -->
+                    android:text="Middle"
+                    android:textColor="#000000"
+                    android:textSize="11sp" />
+<!--android:background="@drawable/shape_profile_field"-->
+                <!-- ── 4. LAST NAME ───────────────────────── -->
                 <TextView
                     android:id="@+id/tv_label_last_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="@dimen/field_label_margin_top"
+                    android:layout_marginBottom="4dp"
                     android:alpha="0.75"
-                    android:letterSpacing="0.2"
-                    android:text="@string/label_last_name"
-                    android:textColor="@color/label_text"
-                    android:textSize="@dimen/field_label_text_size"
+                    android:fontFamily="sans-serif"
+                    android:letterSpacing="0.05"
+                    android:text="Last Name"
+                    android:textColor="#000000"
+                    android:textSize="11sp"
                     android:textStyle="bold" />
 
                 <EditText
                     android:id="@+id/et_last_name"
-                    android:layout_width="@dimen/field_width"
-                    android:layout_height="@dimen/field_height"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="@dimen/field_margin_top"
-                    android:background="@drawable/shape_field_bg"
+                    android:layout_width="match_parent"
+                    android:layout_height="38dp"
+                    android:layout_marginBottom="10dp"
+
                     android:fontFamily="sans-serif-light"
                     android:gravity="center"
                     android:inputType="textPersonName"
-                    android:letterSpacing="0.2"
-                    android:paddingStart="@dimen/field_padding_horizontal"
-                    android:paddingEnd="@dimen/field_padding_horizontal"
+                    android:letterSpacing="0.05"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp"
                     android:singleLine="true"
-                    android:text="@string/field_last_name_value"
-                    android:textColor="@color/text_black"
-                    android:textSize="@dimen/field_text_size" />
+                    android:text="Doe"
+                    android:textColor="#000000"
+                    android:textSize="11sp" />
+                <!--android:background="@drawable/shape_profile_field"-->
 
-                <!-- ── FIELD 5: Email ─────────────────
-                     Label id="38:41" y=719, fontWeight=800
-                     Field id="38:30" y=736, text="johndoe@gmail.com"
-                     ─────────────────────────────────── -->
+                <!-- ── 5. EMAIL ───────────────────────────── -->
                 <TextView
                     android:id="@+id/tv_label_email"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="@dimen/field_label_margin_top"
+                    android:layout_marginBottom="4dp"
                     android:alpha="0.75"
-                    android:letterSpacing="0.2"
-                    android:text="@string/label_email"
-                    android:textColor="@color/label_text"
-                    android:textSize="@dimen/field_label_text_size"
+                    android:fontFamily="sans-serif"
+                    android:letterSpacing="0.05"
+                    android:text="Email"
+                    android:textColor="#000000"
+                    android:textSize="11sp"
                     android:textStyle="bold" />
 
                 <EditText
                     android:id="@+id/et_email"
-                    android:layout_width="@dimen/field_width"
-                    android:layout_height="@dimen/field_height"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="@dimen/field_margin_top"
-                    android:background="@drawable/shape_field_bg"
+                    android:layout_width="match_parent"
+                    android:layout_height="38dp"
+
                     android:fontFamily="sans-serif-light"
                     android:gravity="center"
                     android:inputType="textEmailAddress"
-                    android:letterSpacing="0.2"
-                    android:paddingStart="@dimen/field_padding_horizontal"
-                    android:paddingEnd="@dimen/field_padding_horizontal"
+                    android:letterSpacing="0.05"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp"
                     android:singleLine="true"
-                    android:text="@string/field_email_value"
-                    android:textColor="@color/text_black"
-                    android:textSize="@dimen/field_text_size" />
+                    android:text="johndoe@gmail.com"
+                    android:textColor="#000000"
+                    android:textSize="11sp"/>
+                <!--android:background="@drawable/shape_profile_field"-->
 
             </LinearLayout>
+
         </ScrollView>
+
     </LinearLayout>
 
-</FrameLayout>
+    <!-- ═══════════════════════════════════════════════════════
+         BOTTOM NAVIGATION BAR — identical to Dashboard
+         Figma: ProfileNavigation — #E9EE67 bg, 3 icon slots.
+         Profile slot is the active/highlighted item (right).
+         These IDs are NOT referenced by ProfileActivity.kt,
+         so they are visual-only — no code changes needed.
+         ═══════════════════════════════════════════════════════ -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="58dp"
+        android:orientation="horizontal"
+        android:background="@drawable/shape_bottom_nav"
+        android:gravity="center_vertical">
+
+        <!-- LEFT: create/add icon -->
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:clickable="true"
+            android:contentDescription="Create"
+            android:focusable="true"
+            android:padding="16dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_nav_create" />
+
+        <!-- CENTER: home icon on raised white circle -->
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+
+
+            <ImageView
+                android:id="@+id/iv_home_nav"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:layout_centerInParent="true"
+                android:contentDescription="Home"
+                android:elevation="5dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_home" />
+
+        </RelativeLayout>
+
+        <!-- RIGHT: profile icon — active state (highlighted circle behind it) -->
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <!-- Raised circle indicates active tab -->
+            <View
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_centerInParent="true"
+                android:background="@drawable/shape_circle_white_nav"
+                android:elevation="4dp" />
+
+            <ImageView
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:layout_centerInParent="true"
+                android:contentDescription="Profile"
+                android:elevation="5dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_profile" />
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

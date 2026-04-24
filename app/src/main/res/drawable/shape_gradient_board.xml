@@ -1,17 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-    shape_gradient_board.xml
-    Figma: LogInBoard gradient on Dashboard content area
-    gradientStops: #EDDA0A (yellow) → #BBBBBB (gray)
-    Direction: top (0°) → bottom
+    shape_gradient_board.xml  —  CORRECTED
+    Figma gradientTransform: matrix(0,1,0.134,-1,0,1.073)
+    In Android XML:
+      angle=270 → top-to-bottom  (startColor at TOP, endColor at BOTTOM)
+    So: startColor=#EDDA0A (yellow) at top → endColor=#BBBBBB (gray) at bottom
+    This was already correct in the existing file. Keeping as-is but
+    restating explicitly for clarity.
 -->
 <shape xmlns:android="http://schemas.android.com/apk/res/android"
     android:shape="rectangle">
-
     <gradient
         android:type="linear"
         android:angle="270"
         android:startColor="#EDDA0A"
         android:endColor="#BBBBBB" />
-
 </shape>
